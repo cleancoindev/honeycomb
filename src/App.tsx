@@ -33,14 +33,15 @@ const App: React.FC = () => {
         <MobileMenu onDismiss={handleDismissMobileMenu} visible={mobileMenu} />
         <Switch>
           <Route path="/" exact>
-            <Home />
+            {/* <Home /> */}
+            <Farms />
           </Route>
           <Route path="/farms">
             <Farms />
           </Route>
-          <Route path="/staking">
+          {/* <Route path="/staking">
             <Stake />
-          </Route>
+          </Route> */}
         </Switch>
       </Router>
       <Disclaimer />
