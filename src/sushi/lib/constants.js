@@ -1,4 +1,5 @@
 import BigNumber from 'bignumber.js/bignumber'
+import roseFlower from '../../../assets/rose_flower.svg'
 
 export const SUBTRACT_GAS_LIMIT = 100000
 

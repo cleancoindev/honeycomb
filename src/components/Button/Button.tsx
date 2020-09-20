@@ -12,6 +12,7 @@ interface ButtonProps {
   text?: string,
   to?: string,
   variant?: 'default' | 'secondary' | 'tertiary'
+  background?: string,
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -23,6 +24,7 @@ const Button: React.FC<ButtonProps> = ({
   text,
   to,
   variant,
+  background,
 }) => {
   const { color, spacing } = useContext(ThemeContext)
 
@@ -83,6 +85,7 @@ const Button: React.FC<ButtonProps> = ({
       onClick={onClick}
       padding={buttonPadding}
       size={buttonSize}
+      background={background}
     >
       {children}
       {ButtonChild}
@@ -97,17 +100,18 @@ interface StyledButtonProps {
   fontSize: number,
   padding: number,
   size: number
+  background?: string,
 }
 
 const StyledButton = styled.button<StyledButtonProps>`
-  background: #FFC3AB;
+  background: ${props => props.background || "linear-gradient(268.53deg, #aaf5d4 0%, #7ce0d6 100%)"};
   align-items: center;
   border: 0;
   border-radius: 12px;
   cursor: pointer;
   display: flex;
   font-size: ${props => props.fontSize}px;
-  font-weight: 700;
+  font-weight: 500;
   height: ${props => props.size}px;
   justify-content: center;
   outline: none;

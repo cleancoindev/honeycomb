@@ -9,8 +9,9 @@ const Page: React.FC = ({ children }) => (
   </StyledPage>
 )
 
+const darkMode = false;
 const StyledPage = styled.div`
-  background: white
+background: linear-gradient(111.63deg, ${darkMode ? '#394F50' : '#CBF3EF'} 0%, ${darkMode ? '#484E45' : '#FAFAE2'} 49.48%, ${darkMode ? '#394F50' : '#FFC3AB'} 100%);
 `
 
 const StyledMain = styled.div`

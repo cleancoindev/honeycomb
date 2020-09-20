@@ -13,7 +13,9 @@ import useModal from './hooks/useModal'
 import theme from './theme'
 import Farms from './views/Farms'
 import Home from './views/Home'
+import styled from 'styled-components'
 import Stake from './views/Stake'
+import Page from './components/Page'
 
 const App: React.FC = () => {
   const [mobileMenu, setMobileMenu] = useState(false)
@@ -29,20 +31,21 @@ const App: React.FC = () => {
   return (
     <Providers>
       <Router>
-        <TopBar onPresentMobileMenu={handlePresentMobileMenu} />
-        <MobileMenu onDismiss={handleDismissMobileMenu} visible={mobileMenu} />
-        <Switch>
-          <Route path="/" exact>
-            {/* <Home /> */}
-            <Farms />
-          </Route>
-          <Route path="/farms">
-            <Farms />
-          </Route>
-          {/* <Route path="/staking">
-            <Stake />
-          </Route> */}
-        </Switch>
+        <StyledBackground>
+          <TopBar onPresentMobileMenu={handlePresentMobileMenu} />
+          <MobileMenu onDismiss={handleDismissMobileMenu} visible={mobileMenu} />
+          <Switch>
+            <Route path="/" exact>
+              <Home />
+            </Route>
+            <Route path="/farms">
+              <Farms />
+            </Route>
+            {/* <Route path="/staking">
+              <Stake />
+            </Route> */}
+          </Switch>
+        </StyledBackground>
       </Router>
       <Disclaimer />
     </Providers>
@@ -88,5 +91,10 @@ const Disclaimer: React.FC = () => {
 
   return <div />
 }
+
+const darkMode = false;
+const StyledBackground = styled.div`
+  background: linear-gradient(111.63deg, ${darkMode ? '#394F50' : '#CBF3EF'} 0%, ${darkMode ? '#484E45' : '#FAFAE2'} 49.48%, ${darkMode ? '#394F50' : '#FFC3AB'} 100%);
+`
 
 export default App

@@ -32,15 +32,13 @@ const StyledPageHeader = styled.div`
 `
 
 const StyledIcon = styled.div`
-  font-size: 120px;
   height: 120px;
   line-height: 120px;
   text-align: center;
-  width: 120px;
 `
 
 const StyledTitle = styled.h1`
-  font-family: 'Kaushan Script', sans-serif;
+  font-family: sans-serif;
   color: ${(props) => props.theme.color.grey[600]};
   font-size: 36px;
   font-weight: 700;

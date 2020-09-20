@@ -33,7 +33,7 @@ const Home: React.FC = () => {
           margin: '0 auto',
         }}
       >
-        <Button text="🌼 Explore the Honeycomb" to="/farms" variant="secondary" />
+        <Button text="Explore the Honeycomb" to="/farms" variant="secondary" />
       </div>
     </Page>
   )

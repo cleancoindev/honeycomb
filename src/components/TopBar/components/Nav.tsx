@@ -9,7 +9,7 @@ const Nav: React.FC = () => {
         Home
       </StyledLink>
       <StyledLink exact activeClassName="active" to="/farms">
-        Honeycomb
+        Farm
       </StyledLink>
       {/* <StyledLink exact activeClassName="active" to="/staking">
         Staking
@@ -30,8 +30,8 @@ const StyledNav = styled.nav`
 `
 
 const StyledLink = styled(NavLink)`
-  color: ${(props) => props.theme.color.grey[400]};
-  font-weight: 700;
+  color: "black";
+  font-weight: 500;
   padding-left: ${(props) => props.theme.spacing[3]}px;
   padding-right: ${(props) => props.theme.spacing[3]}px;
   text-decoration: none;
@@ -39,7 +39,7 @@ const StyledLink = styled(NavLink)`
     color: ${(props) => props.theme.color.grey[500]};
   }
   &.active {
-    color: ${(props) => props.theme.color.primary.main};
+    font-weight: 700;
   }
   @media (max-width: 400px) {
     padding-left: ${(props) => props.theme.spacing[2]}px;
