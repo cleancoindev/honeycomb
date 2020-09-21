@@ -9,12 +9,12 @@ const Page: React.FC = ({ children }) => (
   </StyledPage>
 )
 
-const darkMode = false;
 const StyledPage = styled.div`
-background: linear-gradient(111.63deg, ${darkMode ? '#394F50' : '#CBF3EF'} 0%, ${darkMode ? '#484E45' : '#FAFAE2'} 49.48%, ${darkMode ? '#394F50' : '#FFC3AB'} 100%);
+background: white;
 `
 
 const StyledMain = styled.div`
+  background: linear-gradient(111.63deg, #CBF3EF 0%, #FAFAE2 49.48%, #FFC3AB 100%);
   align-items: center;
   display: flex;
   flex-direction: column;

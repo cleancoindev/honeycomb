@@ -8,7 +8,7 @@ import CardContent from '../../../components/CardContent'
 import Label from '../../../components/Label'
 import Spacer from '../../../components/Spacer'
 import Value from '../../../components/Value'
-// import SushiIcon from '../../../components/SushiIcon'
+import HoneyIcon from '../../../assets/img/honey.svg'
 import useAllEarnings from '../../../hooks/useAllEarnings'
 import useAllStakedValue from '../../../hooks/useAllStakedValue'
 import useFarms from '../../../hooks/useFarms'
@@ -87,11 +87,11 @@ const Balances: React.FC = () => {
 
   return (
     <StyledWrapper>
-      <Card>
+      <Card fixedHeight>
         <CardContent>
           <StyledBalances>
             <StyledBalance>
-              {/* <SushiIcon /> */}
+              <img src={HoneyIcon} />
               <Spacer />
               <div style={{ flex: 1 }}>
                 <Label text="Your Honey Balance" />
@@ -111,12 +111,18 @@ const Balances: React.FC = () => {
       </Card>
       <Spacer />
 
-      <Card>
+      <Card fixedHeight>
         <CardContent>
-          <Label text="Total Honey Supply" />
-          <Value
-            value={totalSupply ? getBalanceNumber(totalSupply) : 'Locked'}
-          />
+          <StyledBalance>
+          <img src={HoneyIcon} />
+          <Spacer />
+          <div style={{ flex: 1 }}>
+            <Label text="Total Honey Supply" />
+            <Value
+              value={totalSupply ? getBalanceNumber(totalSupply) : 'Locked'}
+            />
+          </div>
+          </StyledBalance>
         </CardContent>
         {/* <Footnote>
           New rewards per block
@@ -134,7 +140,7 @@ const Footnote = styled.div`
   border-top: solid 1px ${(props) => props.theme.color.grey[300]};
 `
 const FootnoteValue = styled.div`
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'Overpass', sans-serif;
   float: right;
 `
 

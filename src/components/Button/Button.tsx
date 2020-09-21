@@ -61,9 +61,9 @@ const Button: React.FC<ButtonProps> = ({
     default:
       boxShadow = `6px 6px 12px ${color.grey[300]},
         -12px -12px 24px -2px ${color.grey[100]}ff;`
-      buttonPadding = spacing[4]
-      buttonSize = 56
-      fontSize = 16
+      buttonPadding = spacing[3]
+      buttonSize = 40
+      fontSize = 14
   }
 
   const ButtonChild = useMemo(() => {
@@ -129,10 +129,10 @@ const StyledLink = styled(Link)`
   color: inherit;
   display: flex;
   flex: 1;
-  height: 56px;
+  height: 40px;
   justify-content: center;
-  margin: 0 ${props => -props.theme.spacing[4]}px;
-  padding: 0 ${props => props.theme.spacing[4]}px;
+  margin: 0 ${props => -props.theme.spacing[3]}px;
+  padding: 0 ${props => props.theme.spacing[3]}px;
   text-decoration: none;
 `
 
@@ -141,10 +141,10 @@ const StyledExternalLink = styled.a`
   color: inherit;
   display: flex;
   flex: 1;
-  height: 56px;
+  height: 40px;
   justify-content: center;
-  margin: 0 ${props => -props.theme.spacing[4]}px;
-  padding: 0 ${props => props.theme.spacing[4]}px;
+  margin: 0 ${props => -props.theme.spacing[3]}px;
+  padding: 0 ${props => props.theme.spacing[3]}px;
   text-decoration: none;
 `
 

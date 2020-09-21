@@ -15,7 +15,7 @@ const Home: React.FC = () => {
     <Page>
       <PageHeader
         icon={<img src={beeSvg} height={120} />}
-        title="The HoneyComb is waiting"
+        title="The Honeycomb is waiting"
         subtitle="Stake Honeyswap LP tokens to claim your very own yummy Honey!"
       />
 

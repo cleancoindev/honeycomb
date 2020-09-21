@@ -1,33 +1,40 @@
 import React from 'react'
+import { GU, Link as AragonLink, textStyle, useTheme } from '@1hive/1hive-ui'
 import styled from 'styled-components'
 
 const Nav: React.FC = () => {
   return (
-    <StyledNav>
-      <StyledLink
-        target="_blank"
-        href="https://etherscan.io/address/0xc2edad668740f1aa35e4d8f227fb8e17dca888cd#code"
-      >
-        MasterChef Contract
-      </StyledLink>
-      <StyledLink
-        target="_blank"
-        href="https://uniswap.info/pair/0xce84867c3c02b05dc570d0135103d3fb9cc19433"
-      >
-        Uniswap SUSHI-ETH
-      </StyledLink>
-      <StyledLink target="_blank" href="https://discord.gg/hJ2p555">
-        Discord
-      </StyledLink>
-      <StyledLink target="_blank" href="https://github.com/sushiswap">
+    <div>
+      <StyledHeader>
+        Community
+      </StyledHeader>
+      <Link href="https://keybase.io/team/1hive" external>
+        Keybase
+      </Link>
+      <Link href="https://github.com/1Hive" external>
         Github
-      </StyledLink>
-      <StyledLink target="_blank" href="https://twitter.com/sushiswap">
+      </Link>
+      <Link href="https://twitter.com/1HiveOrg" external>
         Twitter
-      </StyledLink>
-    </StyledNav>
+      </Link>
+      <Link href="https://forum.1hive.org/" external>
+        Forum
+      </Link>
+    </div>
   )
 }
+
+const Link = styled(AragonLink)`
+  display: block;
+  margin-bottom: ${1.5 * GU}px;
+  text-align: left;
+  text-decoration: none;
+`
+
+const StyledHeader = styled.h5`
+  ${textStyle('body1')};
+  margin-bottom: ${1.5 * GU}px;
+`
 
 const StyledNav = styled.nav`
   align-items: center;

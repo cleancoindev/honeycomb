@@ -32,24 +32,26 @@ const StyledPageHeader = styled.div`
 `
 
 const StyledIcon = styled.div`
-  height: 120px;
+  height: 110px;
+  margin-bottom: 20px;
   line-height: 120px;
   text-align: center;
 `
 
 const StyledTitle = styled.h1`
-  font-family: sans-serif;
+  font-family: 'Overpass', sans-serif;
   color: ${(props) => props.theme.color.grey[600]};
   font-size: 36px;
-  font-weight: 700;
+  font-weight: 400;
   margin: 0;
   padding: 0;
 `
 
 const StyledSubtitle = styled.h3`
-  color: ${(props) => props.theme.color.grey[400]};
+  color: #2C3437;
+  font-family: 'Overpass', sans-serif;
   font-size: 18px;
-  font-weight: 400;
+  font-weight: 300;
   margin: 0;
   padding: 0;
   text-align: center;

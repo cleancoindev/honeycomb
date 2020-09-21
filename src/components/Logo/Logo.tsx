@@ -8,7 +8,7 @@ const Logo: React.FC = () => {
     <StyledLogo to="/">
       <img src={bee} height="32" style={{ marginTop: -4 }} />
       <StyledText>
-        1hive HoneyComb
+        Honeycomb
       </StyledText>
     </StyledLogo>
   )
@@ -27,9 +27,9 @@ const StyledLogo = styled(Link)`
 
 const StyledText = styled.span`
   color: ${(props) => props.theme.color.grey[600]};
-  font-family: 'Reem Kufi', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 400;
   letter-spacing: 0.03em;
   margin-left: ${(props) => props.theme.spacing[2]}px;
   @media (max-width: 400px) {
