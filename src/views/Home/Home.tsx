@@ -8,8 +8,6 @@ import PageHeader from '../../components/PageHeader'
 import Spacer from '../../components/Spacer'
 import Balances from './components/Balances'
 
-// const BeeIcon = <img src={beeSvg} height={60} alt="" />
-
 const Home: React.FC = () => {
   return (
     <Page>
@@ -23,10 +21,6 @@ const Home: React.FC = () => {
         <Balances />
       </Container>
       <Spacer size="lg" />
-      {/* <StyledInfo>
-        🏆<b>Pro Tip</b>: SUSHI-ETH UNI-V2 LP token pool yields TWICE more token
-        rewards per block.
-      </StyledInfo> */}
       <Spacer size="lg" />
       <div
         style={{

@@ -7,7 +7,6 @@ type Props = {
 
 const Card = ({ children, fixedHeight }: React.PropsWithChildren<Props>) => <StyledCard fixedHeight={fixedHeight}>{children}</StyledCard>
 
-// background: ${(props) => props.theme.color.grey[200]};
 const StyledCard = styled.div<{ fixedHeight: boolean }>`
   height: ${(props) => (props.fixedHeight ? '140px' : 'auto')};
   background-color: white;

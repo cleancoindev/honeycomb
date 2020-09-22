@@ -124,7 +124,9 @@ const Balances: React.FC = () => {
           </div>
           </StyledBalance>
         </CardContent>
-        {/* <Footnote>
+        {/* Are we doing rewards per block like this?
+        
+        <Footnote>
           New rewards per block
           <FootnoteValue>1,000 SUSHI</FootnoteValue>
         </Footnote> */}

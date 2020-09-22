@@ -1,12 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import { GU, Link as AragonLink, textStyle, useTheme } from '@1hive/1hive-ui'
+import { GU, Link as AragonLink, textStyle } from '@1hive/1hive-ui'
 
 import Nav from './components/Nav'
 import Layout from './components/Layout'
 import logoSvg from '../../assets/img/bee.svg'
-
-// const theme = useTheme();
 
 const Footer: React.FC = () => {
   return (
