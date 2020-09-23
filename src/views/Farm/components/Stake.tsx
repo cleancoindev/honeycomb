@@ -93,7 +93,7 @@ const Stake: React.FC<StakeProps> = ({ lpContract, poolContract, tokenName }) =>
                 />
                 <StyledActionSpacer />
                 <IconButton onClick={onPresentDeposit}>
-                  <AddIcon />
+                  <AddIcon color="#2C3437" />
                 </IconButton>
               </>
             )}

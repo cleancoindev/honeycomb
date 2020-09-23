@@ -73,7 +73,7 @@ const Button: React.FC<ButtonProps> = ({
       onClick={onClick}
       padding={buttonPadding}
       size={buttonSize}
-      background={background}
+      background={disabled ? '#E9E9E9' : background}
     >
       {children}
       {ButtonChild}

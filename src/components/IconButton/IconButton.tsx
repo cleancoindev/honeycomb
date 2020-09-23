@@ -28,19 +28,14 @@ interface StyledButtonProps {
 
 const StyledButton = styled.button<StyledButtonProps>`
   align-items: center;
-  background-color: ${(props) => props.theme.color.grey[200]};
+  background: linear-gradient(268.53deg, #aaf5d4 0%, #7ce0d6 100%);
   border: 0;
-  border-radius: 28px;
-  box-shadow: 6px 6px 12px ${(props) => props.theme.color.grey[300]},
-    -12px -12px 24px ${(props) => props.theme.color.grey[100]}aa;
-  color: ${(props) =>
-    !props.disabled
-      ? props.theme.color.primary.main
-      : props.theme.color.grey[400]};
+  border-radius: 12px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
   cursor: pointer;
   display: flex;
   font-weight: 700;
-  height: 56px;
+  height: 40px;
   justify-content: center;
   letter-spacing: 1px;
   outline: none;
@@ -56,7 +51,6 @@ const StyledButton = styled.button<StyledButtonProps>`
 
 const StyledLink = styled(Link)`
   align-items: center;
-  color: inherit;
   display: flex;
   flex: 1;
   height: 56px;
