@@ -1,9 +1,9 @@
 import BigNumber from 'bignumber.js/bignumber'
 import ERC20Abi from './abi/erc20.json'
-import MasterChefAbi from './abi/masterchef.json'
 import SushiAbi from './abi/sushi.json'
 import UNIV2PairAbi from './abi/uni_v2_lp.json'
 import WETHAbi from './abi/weth.json'
+import PoolAbi from './abi/pool.json'
 import {
   contractAddresses,
   SUBTRACT_GAS_LIMIT,
@@ -22,7 +22,6 @@ export class Contracts {
     this.defaultGasPrice = options.defaultGasPrice
 
     this.sushi = new this.web3.eth.Contract(SushiAbi)
-    this.masterChef = new this.web3.eth.Contract(MasterChefAbi)
     this.weth = new this.web3.eth.Contract(WETHAbi)
 
     this.pools = supportedPools.map((pool) =>
@@ -31,6 +30,8 @@ export class Contracts {
         tokenAddress: pool.tokenAddresses[networkId],
         lpContract: new this.web3.eth.Contract(UNIV2PairAbi),
         tokenContract: new this.web3.eth.Contract(ERC20Abi),
+        poolAddress: pool.poolAddresses[networkId],
+        poolContract:  new this.web3.eth.Contract(PoolAbi)
       }),
     )
 
@@ -46,20 +47,19 @@ export class Contracts {
     }
 
     setProvider(this.sushi, contractAddresses.sushi[networkId])
-    setProvider(this.masterChef, contractAddresses.masterChef[networkId])
     setProvider(this.weth, contractAddresses.weth[networkId])
 
     this.pools.forEach(
-      ({ lpContract, lpAddress, tokenContract, tokenAddress }) => {
+      ({ lpContract, lpAddress, tokenContract, tokenAddress, poolAddress, poolContract }) => {
         setProvider(lpContract, lpAddress)
         setProvider(tokenContract, tokenAddress)
+        setProvider(poolContract, poolAddress)
       },
     )
   }
 
   setDefaultAccount(account) {
     this.sushi.options.from = account
-    this.masterChef.options.from = account
   }
 
   async callContractFunction(method, options) {
