@@ -52,6 +52,9 @@ export const contractAddresses = {
   weth: {
     100: '0xe91d153e0b41518a2ce8dd3d7944fa863463a97d',
   },
+  factory: {
+    100: '0xE29DCD715D11455194D7d74c622F3c42C8a37040'
+  }
 }
 
 /*
