@@ -71,7 +71,7 @@ export const supportedPools = [
       100: '0xe91d153e0b41518a2ce8dd3d7944fa863463a97d',
     },
     poolAddresses: {
-      100: '0xC97E1C3755e20406EE3d5790377665B83e4e613d'//'0x8520Fc4C282342f8e746b881b9B60c14F96A0fAB'
+      100: '0x8520Fc4C282342f8e746b881b9B60c14F96A0fAB'
     },
     name: 'Dai Daisies',
     symbol: 'HNY-WXDAI UNI-V2 LP',
