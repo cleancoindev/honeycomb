@@ -133,7 +133,6 @@ const StyledAddresses = styled.div`
     padding: 0 12px;
     border-radius: 4px;
     background-color: #fff;
-    line-height: 24px;
   }
 `
 
