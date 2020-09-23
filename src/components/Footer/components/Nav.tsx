@@ -35,5 +35,4 @@ const StyledHeader = styled.h5`
   ${textStyle('body1')};
   margin-bottom: ${1.5 * GU}px;
 `
-
 export default Nav

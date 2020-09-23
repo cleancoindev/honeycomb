@@ -57,6 +57,7 @@ const Farm: React.FC = () => {
   return (
     <>
       <PageHeader
+        circle
         icon={icon}
         subtitle={`Deposit ${lpTokenName}  Tokens and earn ${earnTokenName}`}
         title={name}
@@ -76,10 +77,6 @@ const Farm: React.FC = () => {
           </StyledCardWrapper>
         </StyledCardsWrapper>
         <Spacer size="lg" />
-        <StyledInfo>
-          ⭐️ Every time you stake and unstake LP tokens, the contract will
-          automagically harvest HONEY rewards for you!
-        </StyledInfo>
         <Spacer size="lg" />
       </StyledFarm>
     </>
@@ -112,15 +109,6 @@ const StyledCardWrapper = styled.div`
   @media (max-width: 768px) {
     width: 80%;
   }
-`
-
-const StyledInfo = styled.h3`
-  color: #818181;
-  font-size: 16px;
-  font-weight: 400;
-  margin: 0;
-  padding: 0;
-  text-align: center;
 `
 
 export default Farm
