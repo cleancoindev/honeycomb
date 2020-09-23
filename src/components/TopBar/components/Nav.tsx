@@ -23,8 +23,8 @@ const StyledNav = styled.nav`
 const StyledLink = styled(NavLink)`
   color: #2C3437;
   font-weight: 500;
-  padding-left: ${(props) => props.theme.spacing[3]}px;
-  padding-right: ${(props) => props.theme.spacing[3]}px;
+  padding-left: ${(props) => props.theme.spacing[4]}px;
+  padding-right: ${(props) => props.theme.spacing[4]}px;
   text-decoration: none;
   &:hover {
     color: ${(props) => props.theme.color.grey[500]};
@@ -32,6 +32,11 @@ const StyledLink = styled(NavLink)`
   &.active {
     font-weight: 700;
   }
+
+  &:not(.active) {
+    color: #545F63;
+  }
+
   @media (max-width: 400px) {
     padding-left: ${(props) => props.theme.spacing[2]}px;
     padding-right: ${(props) => props.theme.spacing[2]}px;

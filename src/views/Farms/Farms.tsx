@@ -26,7 +26,7 @@ const Farms: React.FC = () => {
           <>
             <Route exact path={path}>
               <PageHeader
-                icon={<img src={bee} height="120" />}
+                icon={<img src={bee} height="95" alt="" />}
                 subtitle="Earn Honey tokens by staking Honeyswap V2 LP Tokens."
                 title="Select Your Favorite Flowers"
               />

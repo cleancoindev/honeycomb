@@ -17,7 +17,7 @@ const Value: React.FC<ValueProps> = ({ value, decimals }) => {
       updateStart(end)
       updateEnd(value)
     }
-  }, [value])
+  }, [end, value])
 
   return (
     <StyledValue>
@@ -41,7 +41,7 @@ const Value: React.FC<ValueProps> = ({ value, decimals }) => {
 const StyledValue = styled.div`
   font-family: 'Overpass', sans-serif;
   color: #2C3437;
-  font-size: 36px;
+  font-size: 32px;
   font-weight: 700;
 `
 

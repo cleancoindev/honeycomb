@@ -26,42 +26,30 @@ const Button: React.FC<ButtonProps> = ({
   variant,
   background,
 }) => {
-  const { color, spacing } = useContext(ThemeContext)
+  const { spacing } = useContext(ThemeContext)
 
-  let buttonColor: string
-  switch (variant) {
-    case 'secondary':
-      buttonColor = color.grey[500]
-      break
-    case 'default':
-    default:
-      buttonColor = color.primary.main
-  }
-
+  let buttonColor = '#2C3437'
   let boxShadow: string
   let buttonSize: number
   let buttonPadding: number
   let fontSize: number
   switch (size) {
     case 'sm':
-      boxShadow = `4px 4px 8px ${color.grey[300]},
-        -8px -8px 16px ${color.grey[100]}FF;`
-      buttonPadding = spacing[3]
+      boxShadow = `0px 1px 2px rgba(0, 0, 0, 0.08)`
+      buttonPadding = spacing[4]
       buttonSize = 36
       fontSize = 14
       break
     case 'lg':
-      boxShadow = `6px 6px 12px ${color.grey[300]},
-        -12px -12px 24px ${color.grey[100]}ff;`
+      boxShadow = `0px 1px 2px rgba(0, 0, 0, 0.08)`
       buttonPadding = spacing[4]
       buttonSize = 72
       fontSize = 16
       break
     case 'md':
     default:
-      boxShadow = `6px 6px 12px ${color.grey[300]},
-        -12px -12px 24px -2px ${color.grey[100]}ff;`
-      buttonPadding = spacing[3]
+      boxShadow = `0px 1px 2px rgba(0, 0, 0, 0.08)`
+      buttonPadding = spacing[4]
       buttonSize = 40
       fontSize = 14
   }
@@ -105,6 +93,7 @@ interface StyledButtonProps {
 
 const StyledButton = styled.button<StyledButtonProps>`
   background: ${props => props.background || "linear-gradient(268.53deg, #aaf5d4 0%, #7ce0d6 100%)"};
+  color: ${props => props.color};
   align-items: center;
   border: 0;
   border-radius: 12px;
@@ -122,6 +111,7 @@ const StyledButton = styled.button<StyledButtonProps>`
   &:hover {
     background-color: ${props => props.theme.color.grey[100]};
   }
+  box-shadow: ${props => props.boxShadow};
 `
 
 const StyledLink = styled(Link)`

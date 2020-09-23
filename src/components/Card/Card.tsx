@@ -10,12 +10,13 @@ const Card = ({ children, fixedHeight }: React.PropsWithChildren<Props>) => <Sty
 const StyledCard = styled.div<{ fixedHeight: boolean }>`
   height: ${(props) => (props.fixedHeight ? '140px' : 'auto')};
   background-color: white;
-  border: 1px solid ${(props) => props.theme.color.grey[300]}ff;
+  border: 1px solid #EFEFEF;
   border-radius: 12px;
   box-shadow: inset 1px 1px 0px ${(props) => props.theme.color.grey[100]};
   display: flex;
   flex: 1;
   flex-direction: column;
+  align-self: stretch;
 `
 
 export default Card
