@@ -12,6 +12,7 @@ interface ButtonProps {
   text?: string,
   to?: string,
   variant?: 'default' | 'secondary' | 'tertiary'
+  background?: string,
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -23,6 +24,7 @@ const Button: React.FC<ButtonProps> = ({
   text,
   to,
   variant,
+  background,
 }) => {
   const { color, spacing } = useContext(ThemeContext)
 
@@ -59,9 +61,9 @@ const Button: React.FC<ButtonProps> = ({
     default:
       boxShadow = `6px 6px 12px ${color.grey[300]},
         -12px -12px 24px -2px ${color.grey[100]}ff;`
-      buttonPadding = spacing[4]
-      buttonSize = 56
-      fontSize = 16
+      buttonPadding = spacing[3]
+      buttonSize = 40
+      fontSize = 14
   }
 
   const ButtonChild = useMemo(() => {
@@ -83,6 +85,7 @@ const Button: React.FC<ButtonProps> = ({
       onClick={onClick}
       padding={buttonPadding}
       size={buttonSize}
+      background={background}
     >
       {children}
       {ButtonChild}
@@ -97,19 +100,18 @@ interface StyledButtonProps {
   fontSize: number,
   padding: number,
   size: number
+  background?: string,
 }
 
 const StyledButton = styled.button<StyledButtonProps>`
+  background: ${props => props.background || "linear-gradient(268.53deg, #aaf5d4 0%, #7ce0d6 100%)"};
   align-items: center;
-  background-color: ${props => props.theme.color.grey[200]};
   border: 0;
   border-radius: 12px;
-  box-shadow: ${props => props.boxShadow};
-  color: ${props => !props.disabled ? props.color : `${props.color}55`};
   cursor: pointer;
   display: flex;
   font-size: ${props => props.fontSize}px;
-  font-weight: 700;
+  font-weight: 500;
   height: ${props => props.size}px;
   justify-content: center;
   outline: none;
@@ -127,10 +129,10 @@ const StyledLink = styled(Link)`
   color: inherit;
   display: flex;
   flex: 1;
-  height: 56px;
+  height: 40px;
   justify-content: center;
-  margin: 0 ${props => -props.theme.spacing[4]}px;
-  padding: 0 ${props => props.theme.spacing[4]}px;
+  margin: 0 ${props => -props.theme.spacing[3]}px;
+  padding: 0 ${props => props.theme.spacing[3]}px;
   text-decoration: none;
 `
 
@@ -139,10 +141,10 @@ const StyledExternalLink = styled.a`
   color: inherit;
   display: flex;
   flex: 1;
-  height: 56px;
+  height: 40px;
   justify-content: center;
-  margin: 0 ${props => -props.theme.spacing[4]}px;
-  padding: 0 ${props => props.theme.spacing[4]}px;
+  margin: 0 ${props => -props.theme.spacing[3]}px;
+  padding: 0 ${props => props.theme.spacing[3]}px;
   text-decoration: none;
 `
 

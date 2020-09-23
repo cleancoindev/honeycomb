@@ -4,11 +4,11 @@ import { useWallet } from 'use-wallet'
 
 import { Sushi } from '../../sushi'
 
-export interface SushiContext {
+export interface HoneyContext {
   sushi?: typeof Sushi
 }
 
-export const Context = createContext<SushiContext>({
+export const Context = createContext<HoneyContext>({
   sushi: undefined,
 })
 
@@ -18,7 +18,7 @@ declare global {
   }
 }
 
-const SushiProvider: React.FC = ({ children }) => {
+const HoneyProvider: React.FC = ({ children }) => {
   const { ethereum }: { ethereum: any } = useWallet()
   const [sushi, setSushi] = useState<any>()
 
@@ -48,4 +48,4 @@ const SushiProvider: React.FC = ({ children }) => {
   return <Context.Provider value={{ sushi }}>{children}</Context.Provider>
 }
 
-export default SushiProvider
+export default HoneyProvider

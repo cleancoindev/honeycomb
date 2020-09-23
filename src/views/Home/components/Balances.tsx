@@ -8,12 +8,12 @@ import CardContent from '../../../components/CardContent'
 import Label from '../../../components/Label'
 import Spacer from '../../../components/Spacer'
 import Value from '../../../components/Value'
-import SushiIcon from '../../../components/SushiIcon'
+import HoneyIcon from '../../../assets/img/honey.svg'
 import useAllEarnings from '../../../hooks/useAllEarnings'
 import useAllStakedValue from '../../../hooks/useAllStakedValue'
 import useFarms from '../../../hooks/useFarms'
 import useTokenBalance from '../../../hooks/useTokenBalance'
-import useSushi from '../../../hooks/useSushi'
+import useHoney from '../../../hooks/useSushi'
 import { getSushiAddress, getSushiSupply } from '../../../sushi/utils'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 
@@ -71,70 +71,87 @@ const PendingRewards: React.FC = () => {
 
 const Balances: React.FC = () => {
   const [totalSupply, setTotalSupply] = useState<BigNumber>()
-  const sushi = useSushi()
-  const sushiBalance = useTokenBalance(getSushiAddress(sushi))
+  const honey = useHoney()
+  const honeyBalance = useTokenBalance(getSushiAddress(honey))
   const { account, ethereum }: { account: any; ethereum: any } = useWallet()
 
   useEffect(() => {
     async function fetchTotalSupply() {
-      const supply = await getSushiSupply(sushi)
+      const supply = await getSushiSupply(honey)
       setTotalSupply(supply)
     }
-    if (sushi) {
+    if (honey) {
       fetchTotalSupply()
     }
-  }, [sushi, setTotalSupply])
+  }, [honey, setTotalSupply])
 
   return (
     <StyledWrapper>
-      <Card>
+      <Card fixedHeight>
         <CardContent>
           <StyledBalances>
             <StyledBalance>
-              <SushiIcon />
-              <Spacer />
-              <div style={{ flex: 1 }}>
-                <Label text="Your SUSHI Balance" />
-                <Value
-                  value={!!account ? getBalanceNumber(sushiBalance) : 'Locked'}
-                />
-              </div>
+              <StyledRow>
+                <img src={HoneyIcon} />
+                <Spacer />
+                <div style={{ flex: 1 }}>
+                  <Label text="Your Honey Balance" />
+                  <Value
+                    value={!!account ? getBalanceNumber(honeyBalance) : 'Locked'}
+                  />
+                </div>
+              </StyledRow>
             </StyledBalance>
           </StyledBalances>
         </CardContent>
         <Footnote>
           Pending harvest
           <FootnoteValue>
-            <PendingRewards /> SUSHI
+            <PendingRewards /> Honey
           </FootnoteValue>
         </Footnote>
       </Card>
       <Spacer />
 
-      <Card>
+      <Card fixedHeight>
         <CardContent>
-          <Label text="Total SUSHI Supply" />
-          <Value
-            value={totalSupply ? getBalanceNumber(totalSupply) : 'Locked'}
-          />
+          <StyledBalance>
+          <StyledRow>
+            <img src={HoneyIcon} />
+            <Spacer />
+            <div style={{ flex: 1 }}>
+              <Label text="Total Honey Supply" />
+              <Value
+                value={totalSupply ? getBalanceNumber(totalSupply) : 'Locked'}
+              />
+            </div>
+          </StyledRow>
+          </StyledBalance>
         </CardContent>
+        {/* Are we doing rewards per block like this?
+        
         <Footnote>
           New rewards per block
           <FootnoteValue>1,000 SUSHI</FootnoteValue>
-        </Footnote>
+        </Footnote> */}
       </Card>
     </StyledWrapper>
   )
 }
 
+const StyledRow = styled.div`
+  display: flex;
+  align-items: center;
+`
+
 const Footnote = styled.div`
   font-size: 14px;
   padding: 8px 20px;
-  color: ${(props) => props.theme.color.grey[400]};
-  border-top: solid 1px ${(props) => props.theme.color.grey[300]};
+  color: #818181;
+  border-top: solid 1px #818181;
 `
 const FootnoteValue = styled.div`
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'Overpass', sans-serif;
   float: right;
 `
 
@@ -153,7 +170,7 @@ const StyledBalances = styled.div`
 `
 
 const StyledBalance = styled.div`
-  align-items: center;
+  align-items: flex-start;
   display: flex;
   flex: 1;
 `

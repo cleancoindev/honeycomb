@@ -2,8 +2,8 @@ import React, { useCallback } from 'react'
 import styled from 'styled-components'
 import { useWallet } from 'use-wallet'
 import useTokenBalance from '../../../hooks/useTokenBalance'
-import useSushi from '../../../hooks/useSushi'
-import { getSushiAddress } from '../../../sushi/utils'
+import useHoney from '../../../hooks/useSushi'
+import { getSushiAddress as getHoneyAddress } from '../../../sushi/utils'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import Button from '../../Button'
 import CardIcon from '../../CardIcon'
@@ -14,6 +14,7 @@ import ModalContent from '../../ModalContent'
 import ModalTitle from '../../ModalTitle'
 import Spacer from '../../Spacer'
 import Value from '../../Value'
+import HoneyIcon from '../../../assets/img/honey.svg'
 
 const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
   const { account, reset } = useWallet()
@@ -23,8 +24,8 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
     reset()
   }, [onDismiss, reset])
 
-  const sushi = useSushi()
-  const sushiBalance = useTokenBalance(getSushiAddress(sushi))
+  const honey = useHoney()
+  const honeyBalance = useTokenBalance(getHoneyAddress(honey))
 
   return (
     <Modal>
@@ -35,11 +36,11 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
         <div style={{ display: 'flex' }}>
           <StyledBalanceWrapper>
             <CardIcon>
-              <span>🍣</span>
+              <img src={HoneyIcon} />
             </CardIcon>
             <StyledBalance>
-              <Value value={getBalanceNumber(sushiBalance)} />
-              <Label text="SUSHI Balance" />
+              <Value value={getBalanceNumber(honeyBalance)} />
+              <Label text="HNY Balance" />
             </StyledBalance>
           </StyledBalanceWrapper>
         </div>

@@ -8,12 +8,12 @@ import TopBar from './components/TopBar'
 import FarmsProvider from './contexts/Farms'
 import ModalsProvider from './contexts/Modals'
 import TransactionProvider from './contexts/Transactions'
-import SushiProvider from './contexts/SushiProvider'
+import HoneyProvider from './contexts/HoneyProvider'
 import useModal from './hooks/useModal'
 import theme from './theme'
 import Farms from './views/Farms'
 import Home from './views/Home'
-import Stake from './views/Stake'
+import styled from 'styled-components'
 
 const App: React.FC = () => {
   const [mobileMenu, setMobileMenu] = useState(false)
@@ -29,19 +29,18 @@ const App: React.FC = () => {
   return (
     <Providers>
       <Router>
-        <TopBar onPresentMobileMenu={handlePresentMobileMenu} />
-        <MobileMenu onDismiss={handleDismissMobileMenu} visible={mobileMenu} />
-        <Switch>
-          <Route path="/" exact>
-            <Home />
-          </Route>
-          <Route path="/farms">
-            <Farms />
-          </Route>
-          <Route path="/staking">
-            <Stake />
-          </Route>
-        </Switch>
+        <StyledBackground>
+          <TopBar onPresentMobileMenu={handlePresentMobileMenu} />
+          <MobileMenu onDismiss={handleDismissMobileMenu} visible={mobileMenu} />
+          <Switch>
+            <Route path="/" exact>
+              <Home />
+            </Route>
+            <Route path="/farms">
+              <Farms />
+            </Route>
+          </Switch>
+        </StyledBackground>
       </Router>
       <Disclaimer />
     </Providers>
@@ -57,13 +56,13 @@ const Providers: React.FC = ({ children }) => {
           walletconnect: { rpcUrl: 'https://mainnet.eth.aragon.network/' },
         }}
       >
-        <SushiProvider>
+        <HoneyProvider>
           <TransactionProvider>
             <FarmsProvider>
               <ModalsProvider>{children}</ModalsProvider>
             </FarmsProvider>
           </TransactionProvider>
-        </SushiProvider>
+        </HoneyProvider>
       </UseWalletProvider>
     </ThemeProvider>
   )
@@ -87,5 +86,9 @@ const Disclaimer: React.FC = () => {
 
   return <div />
 }
+
+const StyledBackground = styled.div`
+  background: linear-gradient(111.63deg, #CBF3EF 0%, #FAFAE2' 49.48%, #FFC3AB 100%);
+`
 
 export default App

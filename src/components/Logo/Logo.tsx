@@ -1,14 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import chef from '../../assets/img/chef.png'
+import bee from '../../assets/img/bee.svg'
 
 const Logo: React.FC = () => {
   return (
     <StyledLogo to="/">
-      <img src={chef} height="32" style={{ marginTop: -4 }} />
+      <img src={bee} height="32" style={{ marginTop: -4 }} />
       <StyledText>
-        SushiSwap <MasterChefText>MasterChef</MasterChefText>
+        Honeycomb
       </StyledText>
     </StyledLogo>
   )
@@ -27,18 +27,14 @@ const StyledLogo = styled(Link)`
 
 const StyledText = styled.span`
   color: ${(props) => props.theme.color.grey[600]};
-  font-family: 'Reem Kufi', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 400;
   letter-spacing: 0.03em;
   margin-left: ${(props) => props.theme.spacing[2]}px;
   @media (max-width: 400px) {
     display: none;
   }
-`
-
-const MasterChefText = styled.span`
-  font-family: 'Kaushan Script', sans-serif;
 `
 
 export default Logo

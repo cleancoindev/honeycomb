@@ -35,8 +35,8 @@ const StyledLogoWrapper = styled.div`
     width: auto;
   }
 `
-
-const StyledTopBar = styled.div``
+const StyledTopBar = styled.div`
+`
 
 const StyledTopBarInner = styled.div`
   align-items: center;
@@ -47,6 +47,7 @@ const StyledTopBarInner = styled.div`
   width: 100%;
 `
 const StyledNavWrapper = styled.div`
+  width: 260px;
   display: flex;
   flex: 1;
   justify-content: center;
@@ -58,8 +59,8 @@ const StyledNavWrapper = styled.div`
 const StyledAccountButtonWrapper = styled.div`
   align-items: center;
   display: flex;
-  justify-content: flex-end;
-  width: 156px;
+  width: 260px;
+  justify-content: center;
   @media (max-width: 400px) {
     justify-content: center;
     width: auto;

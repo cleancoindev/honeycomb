@@ -2,6 +2,7 @@ import React from 'react'
 import styled, { keyframes } from 'styled-components'
 
 import CardIcon from '../CardIcon'
+import HoneyIcon from '../../assets/img/honey.svg'
 
 interface LoaderProps {
   text?: string
@@ -11,7 +12,7 @@ const Loader: React.FC<LoaderProps> = ({ text }) => {
   return (
     <StyledLoader>
       <CardIcon>
-        <StyledSushi>🍣</StyledSushi>
+        <StyledHoney><img src={HoneyIcon}/></StyledHoney>
       </CardIcon>
       {!!text && <StyledText>{text}</StyledText>}
     </StyledLoader>
@@ -34,7 +35,7 @@ const StyledLoader = styled.div`
   justify-content: center;
 `
 
-const StyledSushi = styled.div`
+const StyledHoney = styled.div`
   font-size: 32px;
   position: relative;
   animation: 1s ${spin} infinite;

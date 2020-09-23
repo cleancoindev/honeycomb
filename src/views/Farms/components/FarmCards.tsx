@@ -78,7 +78,7 @@ const FarmCards: React.FC = () => {
         ))
       ) : (
         <StyledLoadingWrapper>
-          <Loader text="Cooking the rice ..." />
+          <Loader text="Loading..." />
         </StyledLoadingWrapper>
       )}
     </StyledCards>
@@ -128,7 +128,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
 
   return (
     <StyledCardWrapper>
-      {farm.tokenSymbol === 'SUSHI' && <StyledCardAccent />}
+      {farm.tokenSymbol === 'HNY' && <StyledCardAccent />}
       <Card>
         <CardContent>
           <StyledContent>
@@ -254,7 +254,7 @@ const StyledCardWrapper = styled.div`
 `
 
 const StyledTitle = styled.h4`
-  color: ${(props) => props.theme.color.grey[600]};
+  color: #2C3437;
   font-size: 24px;
   font-weight: 700;
   margin: ${(props) => props.theme.spacing[2]}px 0 0;
@@ -278,7 +278,7 @@ const StyledDetails = styled.div`
 `
 
 const StyledDetail = styled.div`
-  color: ${(props) => props.theme.color.grey[500]};
+  color: #2C3437;
 `
 
 const StyledInsight = styled.div`
@@ -287,7 +287,7 @@ const StyledInsight = styled.div`
   box-sizing: border-box;
   border-radius: 8px;
   background: #fffdfa;
-  color: #aa9584;
+  color: #818181;
   width: 100%;
   margin-top: 12px;
   line-height: 32px;
