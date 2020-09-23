@@ -8,7 +8,7 @@ const Nav: React.FC = () => {
       <StyledHeader>
         Community
       </StyledHeader>
-      <Link href="https://discord.com/invite/EwFs3Pp" external>
+      <Link href="https://discord.gg/qPa4h5w" external>
         Discord
       </Link>
       <Link href="https://github.com/1Hive" external>
