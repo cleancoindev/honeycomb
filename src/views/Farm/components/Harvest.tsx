@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import { Contract } from 'web3-eth-contract'
 import Button from '../../../components/Button'
 import Card from '../../../components/Card'
 import CardContent from '../../../components/CardContent'
@@ -12,13 +13,13 @@ import { getBalanceNumber } from '../../../utils/formatBalance'
 import HoneyIcon from '../../../assets/img/honey.svg'
 
 interface HarvestProps {
-  pid: number
+  poolContract: Contract
 }
 
-const Harvest: React.FC<HarvestProps> = ({ pid }) => {
-  const earnings = useEarnings(pid)
+const Harvest: React.FC<HarvestProps> = ({ poolContract }) => {
+  const earnings = useEarnings(poolContract)
   const [pendingTx, setPendingTx] = useState(false)
-  const { onReward } = useReward(pid)
+  const { onReward } = useReward(poolContract)
 
   return (
     <Card>

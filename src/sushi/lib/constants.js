@@ -32,12 +32,10 @@ export const INTEGERS = {
 }
 
 export const addressMap = {
-  uniswapFactory: '0xc0a47dFe034B400B47bDaD5FecDa2621de6c4d95',
-  uniswapFactoryV2: '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f',
   YFI: '0x0bc529c00C6401aEF6D220BE8C6Ea1667F6Ad93e',
   YCRV: '0xdF5e0e81Dff6FAF3A7e52BA697820c5e32D806A8',
   UNIAmpl: '0xc5be99a02c6857f9eac67bbce58df5572498f40c',
-  WETH: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
+  WETH: '0xe91d153e0b41518a2ce8dd3d7944fa863463a97d',
   UNIRouter: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D',
   LINK: '0x514910771AF9Ca656af840dff83E8264EcF986CA',
   MKR: '0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2',
@@ -49,141 +47,68 @@ export const addressMap = {
 
 export const contractAddresses = {
   sushi: {
-    1: '0x6b3595068778dd592e39a122f4f5a5cf09c90fe2',
+    100: '0x71850b7E9Ee3f13Ab46d67167341E4bDc905Eef9',
   },
   masterChef: {
-    1: '0xc2edad668740f1aa35e4d8f227fb8e17dca888cd',
+    100: '0xE29DCD715D11455194D7d74c622F3c42C8a37040',
   },
   weth: {
-    1: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
+    100: '0xe91d153e0b41518a2ce8dd3d7944fa863463a97d',
   },
 }
 
 /*
-UNI-V2 LP Address on xdai for reference
-==========================================
-HNY/WXDAI  0x4505b262dc053998c10685dc5f9098af8ae5c8ad
-HNY/STAKE  0x298c7326a6e4a6108b88520f285c7dc89403347d
-HNY/WETH   0x89e2f342b411032a580fefa17f96da6a5bef4112
-
+ * UNI-V2 LP Address on xDai
+ * ==========================================
+ * HNY/WXDAI  0x4505b262dc053998c10685dc5f9098af8ae5c8ad
+ * HNY/STAKE  0x298c7326a6e4a6108b88520f285c7dc89403347d
+ * HNY/WETH   0x89e2f342b411032a580fefa17f96da6a5bef4112
 */
 
 export const supportedPools = [
   {
-    pid: 0,
     lpAddresses: {
-      1: '0x4505b262dc053998c10685dc5f9098af8ae5c8ad',
+      100: '0x4505b262dc053998c10685dc5f9098af8ae5c8ad',
     },
     tokenAddresses: {
-      1: '0xe91d153e0b41518a2ce8dd3d7944fa863463a97d',
+      100: '0xe91d153e0b41518a2ce8dd3d7944fa863463a97d',
     },
-    name: 'XDAI Daisies',
-    symbol: 'XDAI-HNY UNI-V2 LP',
-    tokenSymbol: 'DAI',
+    poolAddresses: {
+      100: '0xC97E1C3755e20406EE3d5790377665B83e4e613d'//'0x8520Fc4C282342f8e746b881b9B60c14F96A0fAB'
+    },
+    name: 'Dai Daisies',
+    symbol: 'HNY-WXDAI UNI-V2 LP',
+    tokenSymbol: 'WXDAI',
     icon: <img src={creamFlower} />,
   },
   {
-    pid: 1,
     lpAddresses: {
-      1: '0x89e2f342b411032a580fefa17f96da6a5bef4112',
+      100: '0x298c7326a6e4a6108b88520f285c7dc89403347d',
     },
     tokenAddresses: {
-      1: '0x6a023ccd1ff6f2045c3309768ead9e68f978f6e1',
+      100: '0xb7d311e2eb55f2f68a9440da38e7989210b9a05e',
+    },
+    poolAddresses: {
+      100: '0xA6c55971F21cc1C35Ea617f47980D669a0C09cf3'
+    },
+    name: 'STAKE Sunflower',
+    symbol: 'HNY-STAKE UNI-V2 LP',
+    tokenSymbol: 'STAKE',
+    icon: <img src={yellowFlower} />,
+  },
+  {
+    lpAddresses: {
+      100: '0x89e2f342b411032a580fefa17f96da6a5bef4112',
+    },
+    tokenAddresses: {
+      100: '0x6a023ccd1ff6f2045c3309768ead9e68f978f6e1',
+    },
+    poolAddresses: {
+      100: '0x0de3239086dbf7edf17805107cae89b0c1a2db37'
     },
     name: 'Ether Eucalyptus',
     symbol: 'HNY-WETH UNI-V2 LP',
     tokenSymbol: 'WETH',
     icon: <img src={greenFlower} />,
-  },
-  {
-    pid: 2,
-    lpAddresses: {
-      1: '0x298c7326a6e4a6108b88520f285c7dc89403347d',
-    },
-    tokenAddresses: {
-      1: '0xb7d311e2eb55f2f68a9440da38e7989210b9a05e',
-    },
-    name: 'STAKE Sunflower',
-    symbol: 'STAKE-HNY UNI-V2 LP',
-    tokenSymbol: 'STAKE',
-    icon: <img src={yellowFlower} />,
-  },
-  // {
-  //   pid: 3,
-  //   lpAddresses: {
-  //     1: '0x0d4a11d5eeaac28ec3f61d100daf4d40471f1852',
-  //   },
-  //   tokenAddresses: {
-  //     1: '0xdac17f958d2ee523a2206206994597c13d831ec7',
-  //   },
-  //   name: 'Maker Marigold',
-  //   symbol: 'MKR-HNY UNI-V2 LP',
-  //   tokenSymbol: 'MKR',
-  //   icon: <img src={redYellowFlower} />,
-  // },
-  // {
-  //   pid: 4,
-  //   lpAddresses: {
-  //     1: '0xb4e16d0168e52d35cacd2c6185b44281ec28c9dc',
-  //   },
-  //   tokenAddresses: {
-  //     1: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
-  //   },
-  //   name: 'Circle Snapdragon',
-  //   symbol: 'USDC-HNY UNI-V2 LP',
-  //   tokenSymbol: 'USDC',
-  //   icon: <img src={blueFlower} />,
-  // },
-  // {
-  //   pid: 5,
-  //   lpAddresses: {
-  //     1: '0x88d97d199b9ed37c29d846d00d443de980832a22',
-  //   },
-  //   tokenAddresses: {
-  //     1: '0x04fa0d235c4abf4bcf4787af4cf447de572ef828',
-  //   },
-  //   name: 'UNI Ursinia',
-  //   symbol: 'UNI-HNY UNI-V2 LP',
-  //   tokenSymbol: 'UNI',
-  //   icon: <img src={blueGreenFlower} />,
-  // },
-  // {
-  //   pid: 6,
-  //   lpAddresses: {
-  //     1: '0xa2107fa5b38d9bbd2c461d6edf11b11a50f6b974',
-  //   },
-  //   tokenAddresses: {
-  //     1: '0x514910771af9ca656af840dff83e8264ecf986ca',
-  //   },
-  //   name: 'Aragon Alium',
-  //   symbol: 'ANT-HNY UNI-V2 LP',
-  //   tokenSymbol: 'ANT',
-  //   icon: <img src={roseFlower} />,
-  // },
-  // {
-  //   pid: 7,
-  //   lpAddresses: {
-  //     1: '0xc5be99a02c6857f9eac67bbce58df5572498f40c',
-  //   },
-  //   tokenAddresses: {
-  //     1: '0xd46ba6d942050d489dbd938a2c909a5d5039a161',
-  //   },
-  //   name: 'Sub Snowflake',
-  //   symbol: 'SUB-HNY UNI-V2 LP',
-  //   tokenSymbol: 'SUB',
-  //   icon: <img src={tealFlower} />,
-  // },
-  // {
-  //   pid: 8,
-  //   lpAddresses: {
-  //     1: '0xc5be99a02c6857f9eac67bbce58df5572498f40c',
-  //   },
-  //   tokenAddresses: {
-  //     1: '0xd46ba6d942050d489dbd938a2c909a5d5039a161',
-  //   },
-  //   name: 'Gold Gazania',
-  //   symbol: 'PAXG-HNY UNI-V2 LP',
-  //   tokenSymbol: 'PAXG',
-  //   icon: <img src={yellowFlower} />,
-  // },
+  }
 ]
