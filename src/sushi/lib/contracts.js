@@ -4,6 +4,7 @@ import SushiAbi from './abi/sushi.json'
 import UNIV2PairAbi from './abi/uni_v2_lp.json'
 import WETHAbi from './abi/weth.json'
 import PoolAbi from './abi/pool.json'
+import PoolFactoryAbi from './abi/factory.json'
 import {
   contractAddresses,
   SUBTRACT_GAS_LIMIT,
@@ -35,6 +36,8 @@ export class Contracts {
       }),
     )
 
+    this.factory = new this.web3.eth.Contract(PoolFactoryAbi)
+
     this.setProvider(provider, networkId)
     this.setDefaultAccount(this.web3.eth.defaultAccount)
   }
@@ -48,6 +51,7 @@ export class Contracts {
 
     setProvider(this.sushi, contractAddresses.sushi[networkId])
     setProvider(this.weth, contractAddresses.weth[networkId])
+    setProvider(this.factory, contractAddresses.factory[networkId])
 
     this.pools.forEach(
       ({ lpContract, lpAddress, tokenContract, tokenAddress, poolAddress, poolContract }) => {
