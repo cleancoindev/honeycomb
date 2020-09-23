@@ -49,17 +49,15 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
         <Button
           href={`https://blockscout.com/poa/xdai/address/${account}`}
           text="View on Blockscout"
-          variant="secondary"
         />
         <Spacer />
         <Button
           onClick={handleSignOutClick}
           text="Sign out"
-          variant="secondary"
         />
       </ModalContent>
       <ModalActions>
-        <Button onClick={onDismiss} text="Cancel" />
+        <Button onClick={onDismiss} text="Cancel" variant="secondary" />
       </ModalActions>
     </Modal>
   )
