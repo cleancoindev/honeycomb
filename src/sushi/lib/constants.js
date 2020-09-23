@@ -62,6 +62,9 @@ export const contractAddresses = {
 /*
 UNI-V2 LP Address on xdai for reference
 ==========================================
+HNY/WXDAI  0x4505b262dc053998c10685dc5f9098af8ae5c8ad
+HNY/STAKE  0x298c7326a6e4a6108b88520f285c7dc89403347d
+HNY/WETH   0x89e2f342b411032a580fefa17f96da6a5bef4112
 
 */
 
@@ -69,23 +72,23 @@ export const supportedPools = [
   {
     pid: 0,
     lpAddresses: {
-      1: '0xa478c2975ab1ea89e8196811f51a7b7ade33eb11',
+      1: '0x4505b262dc053998c10685dc5f9098af8ae5c8ad',
     },
     tokenAddresses: {
-      1: '0x6b175474e89094c44da98b954eedeac495271d0f',
+      1: '0xe91d153e0b41518a2ce8dd3d7944fa863463a97d',
     },
-    name: 'DAI Daisies',
-    symbol: 'DAI-HNY UNI-V2 LP',
+    name: 'XDAI Daisies',
+    symbol: 'XDAI-HNY UNI-V2 LP',
     tokenSymbol: 'DAI',
     icon: <img src={creamFlower} />,
   },
   {
     pid: 1,
     lpAddresses: {
-      1: '0xce84867c3c02b05dc570d0135103d3fb9cc19433',
+      1: '0x89e2f342b411032a580fefa17f96da6a5bef4112',
     },
     tokenAddresses: {
-      1: '0x6b3595068778dd592e39a122f4f5a5cf09c90fe2',
+      1: '0x6a023ccd1ff6f2045c3309768ead9e68f978f6e1',
     },
     name: 'Ether Eucalyptus',
     symbol: 'HNY-WETH UNI-V2 LP',
@@ -95,14 +98,14 @@ export const supportedPools = [
   {
     pid: 2,
     lpAddresses: {
-      1: '0xf80758ab42c3b07da84053fd88804bcb6baa4b5c',
+      1: '0x298c7326a6e4a6108b88520f285c7dc89403347d',
     },
     tokenAddresses: {
-      1: '0x57ab1ec28d129707052df4df418d58a2d46d5f51',
+      1: '0xb7d311e2eb55f2f68a9440da38e7989210b9a05e',
     },
     name: 'STAKE Sunflower',
     symbol: 'STAKE-HNY UNI-V2 LP',
-    tokenSymbol: 'SUSD',
+    tokenSymbol: 'STAKE',
     icon: <img src={yellowFlower} />,
   },
   // {

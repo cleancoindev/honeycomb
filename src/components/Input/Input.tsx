@@ -39,7 +39,7 @@ const StyledInputWrapper = styled.div`
 const StyledInput = styled.input`
   background: none;
   border: 0;
-  color: ${props => props.theme.color.grey[600]};
+  color: #2C3437;
   font-size: 18px;
   flex: 1;
   height: 56px;

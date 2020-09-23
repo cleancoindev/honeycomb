@@ -40,7 +40,7 @@ const StyledIcon = styled.div`
 
 const StyledTitle = styled.h1`
   font-family: 'Overpass', sans-serif;
-  color: ${(props) => props.theme.color.grey[600]};
+  color: #2C3437;
   font-size: 36px;
   font-weight: 400;
   margin: 0;
