@@ -141,7 +141,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
             <StyledTitle>{farm.name}</StyledTitle>
             <StyledDetails>
               <StyledDetail>Deposit {farm.lpToken.toUpperCase()}</StyledDetail>
-              <StyledDetail>Earn {farm.earnToken.toUpperCase()}</StyledDetail>
+              <StyledDetail>Earn {farm.earnToken}</StyledDetail>
             </StyledDetails>
             <Spacer />
             <Button
@@ -284,22 +284,19 @@ const StyledDetails = styled.div`
 
 const StyledDetail = styled.div`
   color: #2C3437;
+  font-weight: 200;
 `
 
 const StyledInsight = styled.div`
   display: flex;
   justify-content: space-between;
   box-sizing: border-box;
-  border-radius: 8px;
-  background: #fffdfa;
   color: #818181;
   width: 100%;
   margin-top: 12px;
   line-height: 32px;
   font-size: 13px;
-  border: 1px solid #e6dcd5;
   text-align: center;
-  padding: 0 12px;
 `
 
 export default FarmCards

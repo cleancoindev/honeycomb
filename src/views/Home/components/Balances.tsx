@@ -113,12 +113,12 @@ const Balances: React.FC = () => {
 
   return (
     <StyledWrapper>
-      <Card fixedHeight>
+      <Card>
         <CardContent>
           <StyledBalances>
             <StyledBalance>
               <StyledRow>
-                <img src={HoneyIcon} />
+                <img src={HoneyIcon} alt=""/>
                 <Spacer />
                 <div style={{ flex: 1 }}>
                   <Label text="Your Honey Balance" />
@@ -133,17 +133,17 @@ const Balances: React.FC = () => {
         <Footnote>
           Pending harvest
           <FootnoteValue>
-            <PendingRewards /> Honey
+            <PendingRewards /> HNY
           </FootnoteValue>
         </Footnote>
       </Card>
       <Spacer />
 
-      <Card fixedHeight>
+      <Card>
         <CardContent>
           <StyledBalance>
           <StyledRow>
-            <img src={HoneyIcon} />
+            <img src={HoneyIcon} alt="" />
             <Spacer />
             <div style={{ flex: 1 }}>
               <Label text="Total Honey Supply" />
@@ -174,7 +174,7 @@ const Footnote = styled.div`
   font-size: 14px;
   padding: 8px 20px;
   color: #818181;
-  border-top: solid 1px #818181;
+  border-top: solid 1px #EFEFEF;
 `
 const FootnoteValue = styled.div`
   font-family: 'Overpass', sans-serif;

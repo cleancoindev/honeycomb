@@ -56,7 +56,7 @@ const CircleIcon = styled.div`
 
 const StyledIcon = styled.div`
   height: 110px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   line-height: 120px;
   text-align: center;
 `
