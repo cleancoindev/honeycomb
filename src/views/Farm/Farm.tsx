@@ -110,6 +110,10 @@ const StyledAddresses = styled.div`
   flex-direction: column;
   width: 100%;
   color: #2C3437;
+  font-family: Overpass;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
 
   @media (max-width: 768px) {
     width: 80%;
@@ -126,9 +130,10 @@ const StyledAddresses = styled.div`
   a {
     color: #2C3437;
     text-decoration: none;
-    padding: 3px;
-    background-color: #cecece;
+    padding: 0 12px;
     border-radius: 4px;
+    background-color: #fff;
+    line-height: 24px;
   }
 `
 
