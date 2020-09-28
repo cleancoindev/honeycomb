@@ -1,6 +1,5 @@
 import BigNumber from 'bignumber.js'
 import React, { useState } from 'react'
-import Countdown, { CountdownRenderProps } from 'react-countdown'
 import styled, { keyframes } from 'styled-components'
 import Button from '../../../components/Button'
 import Card from '../../../components/Card'
@@ -95,18 +94,6 @@ interface FarmCardProps {
 const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
   const [startTime, _] = useState(0)
 
-  const renderer = (countdownProps: CountdownRenderProps) => {
-    const { hours, minutes, seconds } = countdownProps
-    const paddedSeconds = seconds < 10 ? `0${seconds}` : seconds
-    const paddedMinutes = minutes < 10 ? `0${minutes}` : minutes
-    const paddedHours = hours < 10 ? `0${hours}` : hours
-    return (
-      <span style={{ width: '100%' }}>
-        {paddedHours}:{paddedMinutes}:{paddedSeconds}
-      </span>
-    )
-  }
-
   return (
     <StyledCardWrapper>
       {farm.tokenSymbol === 'HNY' && <StyledCardAccent />}
@@ -123,12 +110,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
             <Button
               text={'Select'}
               to={`/farms/${farm.id}`}
-            >
-              <Countdown
-                date={new Date(startTime * 1000)}
-                renderer={renderer}
-              />
-            </Button>
+            />
             <StyledInsight>
               <span>APY</span>
               <span>
