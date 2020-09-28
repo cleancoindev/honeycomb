@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
 import beeSvg from '../../assets/img/bee.svg'
 import Button from '../../components/Button'
 import Container from '../../components/Container'
@@ -32,18 +31,5 @@ const Home: React.FC = () => {
     </Page>
   )
 }
-
-const StyledInfo = styled.h3`
-  color: #2C3437;
-  font-size: 16px;
-  font-weight: 400;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-
-  > b {
-    color: #2C3437;
-  }
-`
 
 export default Home

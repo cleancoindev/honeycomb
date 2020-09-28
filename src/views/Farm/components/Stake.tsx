@@ -73,7 +73,7 @@ const Stake: React.FC<StakeProps> = ({ lpContract, poolContract, tokenName }) =>
       <CardContent>
         <StyledCardContentInner>
           <StyledCardHeader>
-            <CardIcon><img src={BeeIcon} height="56px"/></CardIcon>
+            <CardIcon><img src={BeeIcon} height="56px" alt="" /></CardIcon>
             <Value value={getBalanceNumber(stakedBalance)} />
             <Label text={`${tokenName} Tokens Staked`} />
           </StyledCardHeader>

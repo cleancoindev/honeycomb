@@ -1,12 +1,12 @@
 import React from 'react';
 import BigNumber from 'bignumber.js/bignumber'
-import roseFlower from '../../assets/img/rose_flower.svg'
-import blueFlower from '../../assets/img/blue_flower.svg'
+//import roseFlower from '../../assets/img/rose_flower.svg'
+//import blueFlower from '../../assets/img/blue_flower.svg'
 import greenFlower from '../../assets/img/green_flower.svg'
-import blueGreenFlower from '../../assets/img/blue_green_flower.svg'
+//import blueGreenFlower from '../../assets/img/blue_green_flower.svg'
 import creamFlower from '../../assets/img/cream_flower.svg'
-import redYellowFlower from '../../assets/img/red_yellow_flower.svg'
-import tealFlower from '../../assets/img/teal_flower.svg'
+//import redYellowFlower from '../../assets/img/red_yellow_flower.svg'
+//import tealFlower from '../../assets/img/teal_flower.svg'
 import yellowFlower from '../../assets/img/yellow_flower.svg'
 
 export const SUBTRACT_GAS_LIMIT = 100000
@@ -79,7 +79,7 @@ export const supportedPools = [
     name: 'Dai Daisies',
     symbol: 'HNY-WXDAI UNI-V2 LP',
     tokenSymbol: 'WXDAI',
-    icon: <img src={creamFlower} />,
+    icon: <img src={creamFlower} alt="" />,
   },
   {
     lpAddresses: {
@@ -94,7 +94,7 @@ export const supportedPools = [
     name: 'STAKE Sunflower',
     symbol: 'HNY-STAKE UNI-V2 LP',
     tokenSymbol: 'STAKE',
-    icon: <img src={yellowFlower} />,
+    icon: <img src={yellowFlower} alt="" />,
   },
   {
     lpAddresses: {
@@ -109,6 +109,6 @@ export const supportedPools = [
     name: 'Ether Eucalyptus',
     symbol: 'HNY-WETH UNI-V2 LP',
     tokenSymbol: 'WETH',
-    icon: <img src={greenFlower} />,
+    icon: <img src={greenFlower} alt="" />,
   }
 ]

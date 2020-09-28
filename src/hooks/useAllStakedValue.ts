@@ -51,13 +51,13 @@ const useAllStakedValue = () => {
     )
 
     setBalance(balances)
-  }, [account, sushi])
+  }, [farms, wethContact])
 
   useEffect(() => {
     if (account && sushi) {
       fetchAllStakedValue()
     }
-  }, [account, block, setBalance, sushi])
+  }, [account, block, setBalance, sushi, fetchAllStakedValue])
 
   return balances
 }

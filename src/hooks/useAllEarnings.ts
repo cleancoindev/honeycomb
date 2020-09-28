@@ -23,13 +23,13 @@ const useAllEarnings = () => {
       ),
     )
     setBalance(balances)
-  }, [account, sushi])
+  }, [account, farms])
 
   useEffect(() => {
     if (account && sushi) {
       fetchAllBalances()
     }
-  }, [account, block, setBalance, sushi])
+  }, [account, block, setBalance, sushi, fetchAllBalances])
 
   return balances
 }

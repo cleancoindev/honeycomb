@@ -6,7 +6,7 @@ import bee from '../../assets/img/bee.svg'
 const Logo: React.FC = () => {
   return (
     <StyledLogo to="/">
-      <img src={bee} height="32" style={{ marginTop: -4 }} />
+      <img src={bee} alt="Honeycomb" height="32" style={{ marginTop: -4 }} />
       <StyledText>
         Honeycomb
       </StyledText>

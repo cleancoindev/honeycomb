@@ -1,19 +1,15 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
-import { useWallet } from 'use-wallet'
 import useSushi from '../../hooks/useSushi'
 
-import { bnToDec } from '../../utils'
 import { getFarms } from '../../sushi/utils'
 
 import Context from './context'
-import { Farm } from './types'
 
 const Farms: React.FC = ({ children }) => {
-  const [unharvested, setUnharvested] = useState(0)
+  const [unharvested, _] = useState(0)
 
   const sushi = useSushi()
-  const { account } = useWallet()
 
   const farms = getFarms(sushi)
 

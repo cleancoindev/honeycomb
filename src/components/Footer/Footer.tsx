@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { GU, Link as AragonLink, textStyle } from '@1hive/1hive-ui'
+import { GU } from '@1hive/1hive-ui'
 
 import Container from '../Container'
 import Nav from './components/Nav'
@@ -27,28 +27,18 @@ const Footer: React.FC = () => {
 
 const StyleOuterWrap = styled.div`
   flex: 1 0 auto;
-  `
-  const StyleInnerWrap = styled.div`
+`
+const StyleInnerWrap = styled.div`
   align-items: center;
   height: 100%;
   background: rgba(255, 255, 255, 0.5);
-  `
-  const Link = styled(AragonLink)`
-  display: block;
-  margin-bottom: ${1.5 * GU}px;
-  text-align: left;
-  text-decoration: none;
-  `
-  const StyledHeader = styled.h5`
-  ${textStyle('body1')};
-  margin-bottom: ${1.5 * GU}px;
-  `
-  const StyledLogo = styled.div`
+`
+const StyledLogo = styled.div`
   margin-top: 30px;
   width: ${40 * GU}px;
   align-items: center;
-  `
-  const StyledFooter = styled.footer`
+`
+const StyledFooter = styled.footer`
   align-items: center;
   flex-shrink: 0;
   width: 100%;

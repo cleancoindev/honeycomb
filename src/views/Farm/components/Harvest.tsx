@@ -26,7 +26,7 @@ const Harvest: React.FC<HarvestProps> = ({ poolContract }) => {
       <CardContent>
         <StyledCardContentInner>
           <StyledCardHeader>
-            <CardIcon><img src={HoneyIcon} height="54px"/></CardIcon>
+            <CardIcon><img src={HoneyIcon} height="54px" alt="" /></CardIcon>
             <Value value={getBalanceNumber(earnings)} />
             <Label text="HNY Earned" />
           </StyledCardHeader>
@@ -57,11 +57,6 @@ const StyledCardActions = styled.div`
   justify-content: center;
   margin-top: ${(props) => props.theme.spacing[6]}px;
   width: 100%;
-`
-
-const StyledSpacer = styled.div`
-  height: ${(props) => props.theme.spacing[4]}px;
-  width: ${(props) => props.theme.spacing[4]}px;
 `
 
 const StyledCardContentInner = styled.div`
