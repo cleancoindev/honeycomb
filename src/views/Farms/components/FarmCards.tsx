@@ -107,8 +107,6 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
     )
   }
 
-  const poolActive = true // startTime * 1000 - Date.now() <= 0
-
   return (
     <StyledCardWrapper>
       {farm.tokenSymbol === 'HNY' && <StyledCardAccent />}
@@ -123,16 +121,13 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
             </StyledDetails>
             <Spacer />
             <Button
-              disabled={!poolActive}
-              text={poolActive ? 'Select' : undefined}
+              text={'Select'}
               to={`/farms/${farm.id}`}
             >
-              {!poolActive && (
-                <Countdown
-                  date={new Date(startTime * 1000)}
-                  renderer={renderer}
-                />
-              )}
+              <Countdown
+                date={new Date(startTime * 1000)}
+                renderer={renderer}
+              />
             </Button>
             <StyledInsight>
               <span>APY</span>
