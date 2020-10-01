@@ -1,5 +1,4 @@
 import BigNumber from 'bignumber.js/bignumber'
-import ERC20Abi from './abi/erc20.json'
 import SushiAbi from './abi/sushi.json'
 import UNIV2PairAbi from './abi/uni_v2_lp.json'
 import WETHAbi from './abi/weth.json'
@@ -8,7 +7,8 @@ import PoolFactoryAbi from './abi/factory.json'
 import {
   contractAddresses,
   SUBTRACT_GAS_LIMIT,
-  supportedPools,
+  knownPools,
+  INTEGERS
 } from './constants.js'
 import * as Types from './types.js'
 
@@ -25,41 +25,76 @@ export class Contracts {
     this.sushi = new this.web3.eth.Contract(SushiAbi)
     this.weth = new this.web3.eth.Contract(WETHAbi)
 
-    this.pools = supportedPools.map((pool) =>
-      Object.assign(pool, {
-        lpAddress: pool.lpAddresses[networkId],
-        tokenAddress: pool.tokenAddresses[networkId],
-        lpContract: new this.web3.eth.Contract(UNIV2PairAbi),
-        tokenContract: new this.web3.eth.Contract(ERC20Abi),
-        poolAddress: pool.poolAddresses[networkId],
-        poolContract:  new this.web3.eth.Contract(PoolAbi)
-      }),
-    )
-
+    this.pools = []
     this.factory = new this.web3.eth.Contract(PoolFactoryAbi)
 
     this.setProvider(provider, networkId)
     this.setDefaultAccount(this.web3.eth.defaultAccount)
   }
 
-  setProvider(provider, networkId) {
-    const setProvider = (contract, address) => {
-      contract.setProvider(provider)
-      if (address) contract.options.address = address
-      else console.error('Contract address not found in network', networkId)
-    }
+  async addPool({
+    poolAddress,
+    lpAddress,
+    token0Symbol,
+    token1Symbol,
+    earnTokenAddress,
+    earnToken,
+    rewards,
+    staked
+  }) {
+    const poolContract = new this.web3.eth.Contract(PoolAbi)
+    this.setProviderForContract(poolContract, poolAddress)
 
-    setProvider(this.sushi, contractAddresses.sushi[networkId])
-    setProvider(this.weth, contractAddresses.weth[networkId])
-    setProvider(this.factory, contractAddresses.factory[networkId])
+    // Get reward rate for the pool
+    const rewardRate = new BigNumber(
+      await poolContract.methods.rewardRate().call()
+    )
+
+    // Get Uniswap pair address from pool
+    const lpContract = new this.web3.eth.Contract(UNIV2PairAbi)
+    this.setProviderForContract(lpContract, lpAddress)
+
+    // Check if it is a known pool
+    const metadata = knownPools[poolAddress] || {}
+
+    this.pools.push(Object.assign({
+      lpAddress,
+      lpContract,
+      poolAddress,
+      poolContract,
+      name: `${token0Symbol}-${token1Symbol} Pool`,
+      symbol: `${token0Symbol}-${token1Symbol} UNI-V2 LP`,
+      earnToken,
+      earnTokenAddress,
+      rewards,
+      rewardRate: rewardRate.div(INTEGERS.INTEREST_RATE_BASE),
+      staked
+    }, metadata))
+  }
+
+  setProvider(provider, networkId) {
+    this.provider = provider
+    this.networkId = networkId
+
+    this.setProviderForContract(this.sushi, contractAddresses.sushi[networkId])
+    this.setProviderForContract(this.weth, contractAddresses.weth[networkId])
+    this.setProviderForContract(this.factory, contractAddresses.factory[networkId])
 
     this.pools.forEach(
-      ({ lpContract, lpAddress, tokenContract, tokenAddress, poolAddress, poolContract }) => {
-        setProvider(lpContract, lpAddress)
-        setProvider(tokenContract, tokenAddress)
-        setProvider(poolContract, poolAddress)
+      ({ lpContract, lpAddress, poolAddress, poolContract }) => {
+        this.setProviderForContract(lpContract, lpAddress)
+        this.setProviderForContract(poolContract, poolAddress)
       },
     )
+  }
+
+  setProviderForContract(contract, address) {
+    contract.setProvider(this.provider)
+    if (address) {
+      contract.options.address = address
+    } else {
+      console.error('Contract address not found in network', this.networkId)
+    }
   }
 
   setDefaultAccount(account) {

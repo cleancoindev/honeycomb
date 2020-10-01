@@ -28,13 +28,15 @@ export const getFarms = (sushi) => {
           name,
           symbol,
           icon,
-          tokenAddress,
-          tokenSymbol,
-          tokenContract,
           lpAddress,
           lpContract,
           poolAddress,
           poolContract,
+          earnTokenAddress,
+          earnToken,
+          rewards,
+          rewardRate,
+          staked
         }) => ({
           id: symbol,
           name,
@@ -43,12 +45,12 @@ export const getFarms = (sushi) => {
           lpContract,
           poolAddress,
           poolContract,
-          tokenAddress,
-          tokenSymbol,
-          tokenContract,
-          earnToken: 'HNY',
-          earnTokenAddress: sushi.contracts.sushi.options.address,
           icon,
+          earnTokenAddress,
+          earnToken,
+          rewards,
+          rewardRate,
+          staked
         }),
       )
     : []
@@ -56,50 +58,6 @@ export const getFarms = (sushi) => {
 
 export const getEarned = (poolContract, account) => {
   return poolContract.methods.earned(account).call()
-}
-
-export const getTotalLPWethValue = async (
-  poolContract,
-  wethContract,
-  lpContract,
-  tokenContract
-) => {
-  const pool = poolContract.options.address
-
-  // Get balance of the token address
-  const tokenAmountWholeLP = await tokenContract.methods
-    .balanceOf(lpContract.options.address)
-    .call()
-  const tokenDecimals = await tokenContract.methods.decimals().call()
-  // Get the share of lpContract that the pool owns
-  const balance = await lpContract.methods
-    .balanceOf(pool)
-    .call()
-  console.log(balance)
-  // Convert that into the portion of total lpContract = p1
-  const totalSupply = await lpContract.methods.totalSupply().call()
-  // Get total weth value for the lpContract = w1
-  const lpContractWeth = await wethContract.methods
-    .balanceOf(lpContract.options.address)
-    .call()
-  // Return p1 * w1 * 2
-  const portionLp = new BigNumber(balance).div(new BigNumber(totalSupply))
-  const lpWethWorth = new BigNumber(lpContractWeth)
-  const totalLpWethValue = portionLp.times(lpWethWorth).times(new BigNumber(2))
-  // Calculate
-  const tokenAmount = new BigNumber(tokenAmountWholeLP)
-    .times(portionLp)
-    .div(new BigNumber(10).pow(tokenDecimals))
-
-  const wethAmount = new BigNumber(lpContractWeth)
-    .times(portionLp)
-    .div(new BigNumber(10).pow(18))
-  return {
-    tokenAmount,
-    wethAmount,
-    totalWethValue: totalLpWethValue.div(new BigNumber(10).pow(18)),
-    tokenPriceInWeth: wethAmount.div(tokenAmount),
-  }
 }
 
 export const approve = async (lpContract, contract, account) => {

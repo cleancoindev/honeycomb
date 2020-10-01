@@ -31,20 +31,6 @@ export const INTEGERS = {
   INTEREST_RATE_BASE: new BigNumber('1e18'),
 }
 
-export const addressMap = {
-  YFI: '0x0bc529c00C6401aEF6D220BE8C6Ea1667F6Ad93e',
-  YCRV: '0xdF5e0e81Dff6FAF3A7e52BA697820c5e32D806A8',
-  UNIAmpl: '0xc5be99a02c6857f9eac67bbce58df5572498f40c',
-  WETH: '0xe91d153e0b41518a2ce8dd3d7944fa863463a97d',
-  UNIRouter: '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D',
-  LINK: '0x514910771AF9Ca656af840dff83E8264EcF986CA',
-  MKR: '0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2',
-  SNX: '0xC011a73ee8576Fb46F5E1c5751cA3B9Fe0af2a6F',
-  COMP: '0xc00e94Cb662C3520282E6f5717214004A7f26888',
-  LEND: '0x80fB784B7eD66730e8b1DBd9820aFD29931aab03',
-  SUSHIYCRV: '0x2C7a51A357d5739C5C74Bf3C96816849d2c9F726',
-}
-
 export const contractAddresses = {
   sushi: {
     100: '0x71850b7E9Ee3f13Ab46d67167341E4bDc905Eef9',
@@ -65,50 +51,17 @@ export const contractAddresses = {
  * HNY/WETH   0x89e2f342b411032a580fefa17f96da6a5bef4112
 */
 
-export const supportedPools = [
-  {
-    lpAddresses: {
-      100: '0x4505b262dc053998c10685dc5f9098af8ae5c8ad',
-    },
-    tokenAddresses: {
-      100: '0xe91d153e0b41518a2ce8dd3d7944fa863463a97d',
-    },
-    poolAddresses: {
-      100: '0x8520Fc4C282342f8e746b881b9B60c14F96A0fAB'
-    },
+export const knownPools = {
+  '0x8520fc4c282342f8e746b881b9b60c14f96a0fab': {
     name: 'Dai Daisies',
-    symbol: 'HNY-WXDAI UNI-V2 LP',
-    tokenSymbol: 'WXDAI',
-    icon: <img src={creamFlower} alt="" />,
+    icon: <img src={creamFlower} alt="" />
   },
-  {
-    lpAddresses: {
-      100: '0x298c7326a6e4a6108b88520f285c7dc89403347d',
-    },
-    tokenAddresses: {
-      100: '0xb7d311e2eb55f2f68a9440da38e7989210b9a05e',
-    },
-    poolAddresses: {
-      100: '0xA6c55971F21cc1C35Ea617f47980D669a0C09cf3'
-    },
+  '0xa6c55971f21cc1c35ea617f47980d669a0c09cf3': {
     name: 'STAKE Sunflower',
-    symbol: 'HNY-STAKE UNI-V2 LP',
-    tokenSymbol: 'STAKE',
-    icon: <img src={yellowFlower} alt="" />,
+    icon: <img src={yellowFlower} alt="" />
   },
-  {
-    lpAddresses: {
-      100: '0x89e2f342b411032a580fefa17f96da6a5bef4112',
-    },
-    tokenAddresses: {
-      100: '0x6a023ccd1ff6f2045c3309768ead9e68f978f6e1',
-    },
-    poolAddresses: {
-      100: '0x0de3239086dbf7edf17805107cae89b0c1a2db37'
-    },
+  '0x0de3239086dbf7edf17805107cae89b0c1a2db37': {
     name: 'Ether Eucalyptus',
-    symbol: 'HNY-WETH UNI-V2 LP',
-    tokenSymbol: 'WETH',
     icon: <img src={greenFlower} alt="" />,
   }
-]
+}

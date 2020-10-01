@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled, { keyframes } from 'styled-components'
 import Button from '../../../components/Button'
 import Card from '../../../components/Card'
@@ -8,75 +8,86 @@ import CardIcon from '../../../components/CardIcon'
 import Loader from '../../../components/Loader'
 import Spacer from '../../../components/Spacer'
 import { Farm } from '../../../contexts/Farms'
-import useAllStakedValue, {
-  StakedValue,
-} from '../../../hooks/useAllStakedValue'
+import useSushi from '../../../hooks/useSushi'
+import { getSushiAddress } from '../../../sushi/utils'
 import useFarms from '../../../hooks/useFarms'
+import useTokenPrice from '../../../hooks/useTokenPrice'
+import { honeyswapClient } from '../../../apollo/clients'
+import { GET_LIQUIDITY } from '../../../apollo/queries'
+import { INTEGERS } from '../../../sushi/lib/constants'
 
-interface FarmWithStakedValue extends Farm, StakedValue {
+interface FarmWithApy extends Farm {
   apy: BigNumber
 }
 
 const FarmCards: React.FC = () => {
-  const [farms] = useFarms()
-  const stakedValue = useAllStakedValue()
+  const farms = useFarms()
+  const sushi = useSushi()
 
-  const sushiIndex = farms.findIndex(
-    ({ tokenSymbol }) => tokenSymbol === 'HNY',
+  // Get Honey price
+  // TODO(onbjerg): We can make this more dynamic
+  // by getting the reward token address per pool
+  // instead of assuming it is Honey
+  const honeyAddress = getSushiAddress(sushi)
+  const honeyPrice = useTokenPrice(
+    honeyAddress
   )
 
-  const sushiPrice =
-    sushiIndex >= 0 && stakedValue[sushiIndex]
-      ? stakedValue[sushiIndex].tokenPriceInWeth
-      : new BigNumber(0)
+  // Calculate APYs
+  const [apy, setApy] = useState<
+    {[farmId: string]: BigNumber}
+  >({})
+  useEffect(() => {
+    async function calculateApys() {
+      const result: {
+        [farmId: string]: BigNumber
+      } = {}
+      for (const farm of farms) {
+        if (farm.rewardRate.isZero()) {
+          continue
+        }
 
+        // Get the total amount of LP tokens for this pair
+        const lpTotalSupply = new BigNumber(
+          await farm.lpContract.methods.totalSupply().call()
+        ).div(INTEGERS.INTEREST_RATE_BASE)
 
-  const BLOCKS_PER_YEAR = new BigNumber(2336000) // TODO
-  const SUSHI_PER_BLOCK = new BigNumber(1000) // TODO
-  console.log(
-    sushiIndex,
-    stakedValue[sushiIndex]
-      ? stakedValue[sushiIndex].tokenPriceInWeth.toString()
-      : new BigNumber(0).toString(),
-    sushiPrice.times(SUSHI_PER_BLOCK).times(BLOCKS_PER_YEAR).toString(),
-    stakedValue.map(({ totalWethValue }) => console.log(totalWethValue))
-  )
+        // Get the total liquidity for this pair (in USD)
+        const { data: liquidityData } = await honeyswapClient.query({
+          query: GET_LIQUIDITY,
+          variables: { pair: farm.lpTokenAddress }
+        })
+        const pairLiquidityValue = new BigNumber(liquidityData.pair.reserveETH)
 
-  const rows = farms.reduce<FarmWithStakedValue[][]>(
-    (farmRows, farm, i) => {
-      const farmWithStakedValue = {
-        ...farm,
-        ...stakedValue[i],
-        apy: stakedValue[i]
-          ? sushiPrice // TODO
-              .times(SUSHI_PER_BLOCK) // TODO
-              .times(BLOCKS_PER_YEAR) // TODO
-              .div(stakedValue[i].totalWethValue) // TODO
-          : null,
+        // Calculate the USD value of each LP token
+        const lpPricePerToken = pairLiquidityValue.div(lpTotalSupply)
+
+        // Calculate the APY
+        result[farm.id] = honeyPrice
+          .times(farm.rewardRate)
+          .times(INTEGERS.ONE_YEAR_IN_SECONDS)
+          .div(farm.staked)
+          .div(lpPricePerToken)
       }
-      const newFarmRows = [...farmRows]
-      if (newFarmRows[newFarmRows.length - 1].length === 3) {
-        newFarmRows.push([farmWithStakedValue])
-      } else {
-        newFarmRows[newFarmRows.length - 1].push(farmWithStakedValue)
-      }
-      return newFarmRows
-    },
-    [[]],
+      setApy(result)
+    }
+
+    calculateApys()
+  }, [farms, honeyPrice])
+
+  // Decorate farms with APYs
+  const farmsWithApy = farms.map<FarmWithApy>(
+    (farm) => ({
+      ...farm,
+      apy: apy[farm.id]
+    })
   )
 
   return (
     <StyledCards>
-      {!!rows[0].length ? (
-        rows.map((farmRow, i) => (
-          <StyledRow key={i}>
-            {farmRow.map((farm, j) => (
-              <React.Fragment key={j}>
-                <FarmCard farm={farm} />
-                {(j === 0 || j === 1) && <StyledSpacer />}
-              </React.Fragment>
-            ))}
-          </StyledRow>
+      {!!farmsWithApy.length ? (
+        farmsWithApy.map((farm, i) => (
+          <FarmCard farm={farm} key={i} />
         ))
       ) : (
         <StyledLoadingWrapper>
@@ -88,15 +99,12 @@ const FarmCards: React.FC = () => {
 }
 
 interface FarmCardProps {
-  farm: FarmWithStakedValue
+  farm: FarmWithApy
 }
 
 const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
-  const [startTime, _] = useState(0)
-
   return (
     <StyledCardWrapper>
-      {farm.tokenSymbol === 'HNY' && <StyledCardAccent />}
       <Card>
         <CardContent>
           <StyledContent>
@@ -120,20 +128,20 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
                       .toNumber()
                       .toLocaleString('en-US')
                       .slice(0, -1)}%`
-                  : 'Loading ...'}
-              </span>
-              {/* <span>
-                {farm.tokenAmount
-                  ? (farm.tokenAmount.toNumber() || 0).toLocaleString('en-US')
-                  : '-'}{' '}
-                {farm.tokenSymbol}
+                  : '-'}
               </span>
               <span>
-                {farm.wethAmount
-                  ? (farm.wethAmount.toNumber() || 0).toLocaleString('en-US')
+                {farm.rewards
+                  ? (farm.rewards.toNumber() || 0).toLocaleString('en-US')
                   : '-'}{' '}
-                ETH
-              </span> */}
+                {farm.earnToken}
+              </span>
+              <span>
+                {farm.staked
+                  ? (farm.staked.toNumber() || 0).toLocaleString('en-US')
+                  : '-'}{' '}
+                LP
+              </span>
             </StyledInsight>
           </StyledContent>
         </CardContent>
@@ -142,50 +150,18 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
   )
 }
 
-const RainbowLight = keyframes`
-  
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
-`
-
-const StyledCardAccent = styled.div`
-  background: linear-gradient(
-    45deg,
-    rgba(255, 0, 0, 1) 0%,
-    rgba(255, 154, 0, 1) 10%,
-    rgba(208, 222, 33, 1) 20%,
-    rgba(79, 220, 74, 1) 30%,
-    rgba(63, 218, 216, 1) 40%,
-    rgba(47, 201, 226, 1) 50%,
-    rgba(28, 127, 238, 1) 60%,
-    rgba(95, 21, 242, 1) 70%,
-    rgba(186, 12, 248, 1) 80%,
-    rgba(251, 7, 217, 1) 90%,
-    rgba(255, 0, 0, 1) 100%
-  );
-  background-size: 300% 300%;
-  animation: ${RainbowLight} 2s linear infinite;
-  border-radius: 12px;
-  filter: blur(6px);
-  position: absolute;
-  top: -2px;
-  right: -2px;
-  bottom: -2px;
-  left: -2px;
-  z-index: -1;
-`
 
 const StyledCards = styled.div`
   width: 900px;
   @media (max-width: 768px) {
     width: 100%;
+  }
+  display: flex;
+  flex-flow: row wrap;
+  @media (max-width: 768px) {
+    width: 100%;
+    flex-flow: column nowrap;
+    align-items: center;
   }
 `
 
@@ -196,20 +172,12 @@ const StyledLoadingWrapper = styled.div`
   justify-content: center;
 `
 
-const StyledRow = styled.div`
-  display: flex;
-  margin-bottom: ${(props) => props.theme.spacing[4]}px;
-  flex-flow: row wrap;
-  @media (max-width: 768px) {
-    width: 100%;
-    flex-flow: column nowrap;
-    align-items: center;
-  }
-`
-
 const StyledCardWrapper = styled.div`
   display: flex;
   width: calc((900px - ${(props) => props.theme.spacing[4]}px * 2) / 3);
+  margin: ${(props) => props.theme.spacing[2]}px;
+  margin-bottom: ${(props) => props.theme.spacing[4]}px;
+  margin-top: 0;
   position: relative;
 `
 
@@ -225,11 +193,6 @@ const StyledContent = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
-`
-
-const StyledSpacer = styled.div`
-  height: ${(props) => props.theme.spacing[4]}px;
-  width: ${(props) => props.theme.spacing[4]}px;
 `
 
 const StyledDetails = styled.div`

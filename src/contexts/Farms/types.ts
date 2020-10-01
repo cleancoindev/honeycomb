@@ -1,3 +1,4 @@
+import BigNumber from 'bignumber.js'
 import { Contract } from 'web3-eth-contract'
 
 export interface Farm {
@@ -6,12 +7,13 @@ export interface Farm {
   lpTokenAddress: string
   lpContract: Contract
   poolContract: Contract
-  tokenAddress: string
   earnToken: string
   earnTokenAddress: string
   icon: React.ReactNode
   id: string
-  tokenSymbol: string
+  staked: BigNumber
+  rewards: BigNumber
+  rewardRate: BigNumber
 }
 
 export interface FarmsContext {
