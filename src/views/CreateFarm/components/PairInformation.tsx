@@ -34,8 +34,8 @@ const PairInformation: React.FC<PairInformationProps> = ({ data, hasPool }) => {
               fontWeight: 'normal'
             }}>
               {hasPool
-                ? 'There is already an existing pool for this pair.'
-                : 'You can create this pool.'}
+                ? 'There is already an existing farm for this pair.'
+                : 'You can create this farm.'}
             </div>
           </StyledCardContent>
         </CardContent>
