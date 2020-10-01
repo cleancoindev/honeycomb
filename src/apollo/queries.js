@@ -38,3 +38,17 @@ export const GET_LIQUIDITY = gql`
     }
   }
 `
+
+export const GET_PAIR = gql`
+  query pair($pair: ID!) {
+    pair(id: $pair) {
+      token0 {
+        symbol
+      }
+      token1 {
+        symbol
+      }
+      reserveETH
+    }
+  }
+`
