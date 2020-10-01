@@ -11,6 +11,7 @@ import WalletProviderModal from '../../components/WalletProviderModal'
 
 import useModal from '../../hooks/useModal'
 
+import CreateFarm from '../CreateFarm'
 import Farm from '../Farm'
 
 import FarmCards from './components/FarmCards'
@@ -31,6 +32,9 @@ const Farms: React.FC = () => {
                 title="Select Your Favorite Flowers"
               />
               <FarmCards />
+            </Route>
+            <Route path={`${path}/create`}>
+              <CreateFarm />
             </Route>
             <Route path={`${path}/:farmId`}>
               <Farm />

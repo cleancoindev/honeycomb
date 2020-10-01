@@ -102,3 +102,12 @@ export const harvest = async (poolContract, account) => {
       return tx.transactionHash
     })
 }
+export const createPool = (factoryContract, account, pairAddress) => {
+  return factoryContract.methods
+    .createUnipoolWithProxy(pairAddress)
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      console.log(tx)
+      return tx.transactionHash
+    })
+}
