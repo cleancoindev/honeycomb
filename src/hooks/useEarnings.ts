@@ -11,9 +11,8 @@ import useBlock from './useBlock'
 const useEarnings = (poolContract: Contract) => {
   const [balance, setBalance] = useState(new BigNumber(0))
   const {
-    account,
-    ethereum,
-  }: { account: string; ethereum: provider } = useWallet()
+    account
+  }: { account: string; } = useWallet()
   const block = useBlock()
 
   const fetchBalance = useCallback(async () => {
@@ -25,7 +24,7 @@ const useEarnings = (poolContract: Contract) => {
     if (account && poolContract) {
       fetchBalance()
     }
-  }, [account, block, poolContract, setBalance])
+  }, [account, block, poolContract, setBalance, fetchBalance])
 
   return balance
 }

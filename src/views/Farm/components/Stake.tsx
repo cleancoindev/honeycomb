@@ -7,7 +7,7 @@ import Card from '../../../components/Card'
 import CardContent from '../../../components/CardContent'
 import CardIcon from '../../../components/CardIcon'
 import IconButton from '../../../components/IconButton'
-import { AddIcon } from '../../../components/icons'
+import { AddIcon } from '../../../components/Icons'
 import Label from '../../../components/Label'
 import Value from '../../../components/Value'
 import useAllowance from '../../../hooks/useAllowance'
@@ -73,7 +73,7 @@ const Stake: React.FC<StakeProps> = ({ lpContract, poolContract, tokenName }) =>
       <CardContent>
         <StyledCardContentInner>
           <StyledCardHeader>
-            <CardIcon><img src={BeeIcon} height="56px"/></CardIcon>
+            <CardIcon><img src={BeeIcon} height="56px" alt="" /></CardIcon>
             <Value value={getBalanceNumber(stakedBalance)} />
             <Label text={`${tokenName} Tokens Staked`} />
           </StyledCardHeader>

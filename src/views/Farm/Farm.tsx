@@ -1,13 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
-import { useWallet } from 'use-wallet'
-import { provider } from 'web3-core'
 import useSushi from '../../hooks/useSushi'
 import PageHeader from '../../components/PageHeader'
 import Spacer from '../../components/Spacer'
 import useFarm from '../../hooks/useFarm'
-import { getContract } from '../../utils/erc20'
 import Harvest from './components/Harvest'
 import Stake from './components/Stake'
 import { formatAddress } from '../../utils'
@@ -17,7 +14,6 @@ const Farm: React.FC = () => {
   const { farmId } = useParams()
   const {
     lpToken,
-    tokenAddress,
     earnToken,
     name,
     icon,
@@ -25,7 +21,6 @@ const Farm: React.FC = () => {
     poolContract
   } = useFarm(farmId) || {
     lpToken: '',
-    tokenAddress: '',
     earnToken: '',
     name: '',
     icon: '',
@@ -36,8 +31,6 @@ const Farm: React.FC = () => {
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
-
-  const { ethereum } = useWallet()
 
   const lpTokenName = useMemo(() => {
     return lpToken.toUpperCase()

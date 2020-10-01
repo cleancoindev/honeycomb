@@ -1,8 +1,6 @@
 import BigNumber from 'bignumber.js'
-import React, { useEffect, useState } from 'react'
-import Countdown, { CountdownRenderProps } from 'react-countdown'
+import React, { useState } from 'react'
 import styled, { keyframes } from 'styled-components'
-import { useWallet } from 'use-wallet'
 import Button from '../../../components/Button'
 import Card from '../../../components/Card'
 import CardContent from '../../../components/CardContent'
@@ -14,8 +12,6 @@ import useAllStakedValue, {
   StakedValue,
 } from '../../../hooks/useAllStakedValue'
 import useFarms from '../../../hooks/useFarms'
-import { getEarned } from '../../../sushi/utils'
-import { bnToDec } from '../../../utils'
 
 interface FarmWithStakedValue extends Farm, StakedValue {
   apy: BigNumber
@@ -23,7 +19,6 @@ interface FarmWithStakedValue extends Farm, StakedValue {
 
 const FarmCards: React.FC = () => {
   const [farms] = useFarms()
-  const { account } = useWallet()
   const stakedValue = useAllStakedValue()
 
   const sushiIndex = farms.findIndex(
@@ -97,39 +92,7 @@ interface FarmCardProps {
 }
 
 const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
-  const [startTime, setStartTime] = useState(0)
-  const [harvestable, setHarvestable] = useState(0)
-
-  const { account } = useWallet()
-  const { poolContract } = farm
-
-  const renderer = (countdownProps: CountdownRenderProps) => {
-    const { hours, minutes, seconds } = countdownProps
-    const paddedSeconds = seconds < 10 ? `0${seconds}` : seconds
-    const paddedMinutes = minutes < 10 ? `0${minutes}` : minutes
-    const paddedHours = hours < 10 ? `0${hours}` : hours
-    return (
-      <span style={{ width: '100%' }}>
-        {paddedHours}:{paddedMinutes}:{paddedSeconds}
-      </span>
-    )
-  }
-
-  useEffect(() => {
-    async function fetchEarned() {
-      if (!poolContract) return
-      const earned = await getEarned(
-        poolContract,
-        account,
-      )
-      setHarvestable(bnToDec(new BigNumber(earned)))
-    }
-    if (poolContract && account) {
-      fetchEarned()
-    }
-  }, [poolContract, account, setHarvestable])
-
-  const poolActive = true // startTime * 1000 - Date.now() <= 0
+  const [startTime, _] = useState(0)
 
   return (
     <StyledCardWrapper>
@@ -145,17 +108,9 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
             </StyledDetails>
             <Spacer />
             <Button
-              disabled={!poolActive}
-              text={poolActive ? 'Select' : undefined}
+              text={'Select'}
               to={`/farms/${farm.id}`}
-            >
-              {!poolActive && (
-                <Countdown
-                  date={new Date(startTime * 1000)}
-                  renderer={renderer}
-                />
-              )}
-            </Button>
+            />
             <StyledInsight>
               <span>APY</span>
               <span>
