@@ -1,11 +1,39 @@
 import React, { createContext, useEffect, useState } from 'react'
+import BigNumber from 'bignumber.js'
 
 import { useWallet } from 'use-wallet'
 
 import { Sushi } from '../../sushi'
 
+// TODO(onbjerg): We should move these type definitions into sushilib
+// TODO(onbjerg): Make these type definitions more strict
+interface Contracts {
+  factory: any,
+  addPool(poolDefinition: {
+    poolAddress: string,
+    lpAddress: string,
+    token0Symbol: string,
+    token1Symbol: string,
+    earnTokenAddress: string,
+    earnToken: string,
+    rewards: BigNumber,
+    staked: BigNumber
+  }): Promise<void>
+}
+
+interface SushiLib {
+  resetEVM(): Promise<void>,
+  addAccount(address: string, number: number): void,
+  setProvider(provider: any, networkId: number): void,
+  setDefaultAccount(account: string): void,
+  getDefaultAccount(): string,
+  loadAccount(account: string): void,
+  toBigN(a: any): any,
+  contracts: Contracts
+}
+
 export interface HoneyContext {
-  sushi?: typeof Sushi
+  sushi?: SushiLib
 }
 
 export const Context = createContext<HoneyContext>({

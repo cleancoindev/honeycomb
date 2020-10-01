@@ -45,7 +45,7 @@ const Farm: React.FC = () => {
   const [fundingAddress, setFundingAddress] = useState(null)
 
   useEffect(() => {
-    if (!factoryContract) return
+    if (!factoryContract || !lpContract) return
     const fetchFundingAddress = async () => {
       const { proxy } = await factoryContract.methods.pools(lpContract.options.address).call()
       setFundingAddress(proxy)
