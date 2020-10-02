@@ -33,7 +33,7 @@ const App: React.FC = () => {
           <StakeDisclaimer>
             Do <b>NOT</b> stake funds on this site yet. If you have already done so, please unstake.
 
-            Learn more about Honeycomb by reading <a href="#">latest announcement.</a>
+            Learn more about Honeycomb by reading <a href="https://about.1hive.org/blog/honey-land/">latest announcement.</a>
           </StakeDisclaimer>
           <Switch>
             <Route path="/" exact>
