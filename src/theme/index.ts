@@ -16,6 +16,7 @@ const theme = {
       main: green[500],
     },
     white,
+    red
   },
   siteWidth: 1200,
   spacing: {
