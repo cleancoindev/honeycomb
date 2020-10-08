@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState, useMemo } from 'react'
 import { provider } from 'web3-core'
 import { Contract } from 'web3-eth-contract'
 
@@ -13,7 +13,7 @@ const useAllEarnings = () => {
   const [balances, setBalance] = useState([] as Array<BigNumber>)
   const { account }: { account: string; ethereum: provider } = useWallet()
   const sushi = useSushi()
-  const farms = getFarms(sushi)
+  const farms = useMemo(() => getFarms(sushi), [sushi])
   const block = useBlock()
 
   const fetchAllBalances = useCallback(async () => {
