@@ -68,10 +68,10 @@ const Balances: React.FC = () => {
       const supply = await getSushiSupply(honey)
       setTotalSupply(supply)
     }
-    if (honey && account && getSushiAddress(honey)) {
+    if (account && getSushiAddress(honey)) {
       fetchTotalSupply()
     }
-  }, [honey, setTotalSupply, account])
+  }, [honey, account])
 
   return (
     <StyledWrapper>
