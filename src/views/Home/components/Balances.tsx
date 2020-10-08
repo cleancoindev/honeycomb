@@ -68,10 +68,10 @@ const Balances: React.FC = () => {
       const supply = await getSushiSupply(honey)
       setTotalSupply(supply)
     }
-    if (honey) {
+    if (account && getSushiAddress(honey)) {
       fetchTotalSupply()
     }
-  }, [honey, setTotalSupply])
+  }, [honey, account])
 
   return (
     <StyledWrapper>
@@ -116,12 +116,6 @@ const Balances: React.FC = () => {
           </StyledRow>
           </StyledBalance>
         </CardContent>
-        {/* Are we doing rewards per block like this?
-        
-        <Footnote>
-          New rewards per block
-          <FootnoteValue>1,000 SUSHI</FootnoteValue>
-        </Footnote> */}
       </Card>
     </StyledWrapper>
   )
