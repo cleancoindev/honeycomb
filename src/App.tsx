@@ -30,11 +30,6 @@ const App: React.FC = () => {
         <StyledBackground>
           <TopBar onPresentMobileMenu={handlePresentMobileMenu} />
           <MobileMenu onDismiss={handleDismissMobileMenu} visible={mobileMenu} />
-          <StakeDisclaimer>
-            Do <b>NOT</b> stake funds on this site yet. If you have already done so, please unstake.
-
-            Learn more about Honeycomb by reading <a href="https://about.1hive.org/blog/honey-land/">latest announcement.</a>
-          </StakeDisclaimer>
           <Switch>
             <Route path="/" exact>
               <Home />
@@ -66,19 +61,6 @@ const Providers: React.FC = ({ children }) => {
     </ThemeProvider>
   )
 }
-
-const StakeDisclaimer = styled.div`
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 10px;
-  background: ${({ theme }) => theme.color.red[500]};
-  color: #fff;
-
-  a {
-    font-weight: 500;
-    color: #fff;
-  }
-`
 
 const StyledBackground = styled.div`
   background: linear-gradient(111.63deg, #CBF3EF 0%, #FAFAE2' 49.48%, #FFC3AB 100%);
