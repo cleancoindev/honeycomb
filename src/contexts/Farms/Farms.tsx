@@ -7,6 +7,7 @@ import { honeycombClient } from '../../apollo/clients'
 import { GET_POOLS } from '../../apollo/queries'
 
 import useSushi from '../../hooks/useSushi'
+import useTokens from '../../hooks/useTokens'
 
 import { getFarms } from '../../sushi/utils'
 
@@ -18,6 +19,7 @@ const Farms: React.FC = ({ children }) => {
   const { data, loading } = useQuery(GET_POOLS, {
     client: honeycombClient
   })
+  const tokens = useTokens()
 
   const { status } = useWallet()
   const sushi = useSushi()
@@ -25,6 +27,10 @@ const Farms: React.FC = ({ children }) => {
   useEffect(() => {
     async function fetchFarms () {
       for (const pool of data.pools) {
+        const token0Exists = !!tokens
+          .find(({ address }) => address.toLowerCase() === pool.pair.token0.id.toLowerCase())
+        const token1Exists = !!tokens
+          .find(({ address }) => address.toLowerCase() === pool.pair.token1.id.toLowerCase())
         await sushi.contracts.addPool({
           poolAddress: pool.id,
           lpAddress: pool.pair.id,
@@ -33,17 +39,18 @@ const Farms: React.FC = ({ children }) => {
           earnTokenAddress: pool.rewardToken.id,
           earnToken: pool.rewardToken.symbol,
           rewards: new BigNumber(pool.rewards),
-          staked: new BigNumber(pool.staked)
+          staked: new BigNumber(pool.staked),
+          verified: token0Exists && token1Exists
         })
       }
 
       setFarms(getFarms(sushi))
     }
 
-    if (status === 'connected' && !loading) {
+    if (status === 'connected' && !loading && tokens.length) {
       fetchFarms()
     }
-  }, [status, sushi, loading, data])
+  }, [status, sushi, loading, data, tokens])
 
   return (
     <Context.Provider

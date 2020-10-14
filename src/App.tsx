@@ -8,6 +8,7 @@ import FarmsProvider from './contexts/Farms'
 import ModalsProvider from './contexts/Modals'
 import TransactionProvider from './contexts/Transactions'
 import HoneyProvider from './contexts/HoneyProvider'
+import TokensProvider from './contexts/Tokens'
 import theme from './theme'
 import Farms from './views/Farms'
 import Home from './views/Home'
@@ -52,9 +53,11 @@ const Providers: React.FC = ({ children }) => {
       >
         <HoneyProvider>
           <TransactionProvider>
-            <FarmsProvider>
-              <ModalsProvider>{children}</ModalsProvider>
-            </FarmsProvider>
+            <TokensProvider>
+              <FarmsProvider>
+                <ModalsProvider>{children}</ModalsProvider>
+              </FarmsProvider>
+            </TokensProvider>
           </TransactionProvider>
         </HoneyProvider>
       </UseWalletProvider>

@@ -40,7 +40,8 @@ export class Contracts {
     earnTokenAddress,
     earnToken,
     rewards,
-    staked
+    staked,
+    verified
   }) {
     const poolContract = new this.web3.eth.Contract(PoolAbi)
     this.setProviderForContract(poolContract, poolAddress)
@@ -68,7 +69,8 @@ export class Contracts {
       earnTokenAddress,
       rewards,
       rewardRate: rewardRate.div(INTEGERS.INTEREST_RATE_BASE),
-      staked
+      staked,
+      verified
     }, metadata))
   }
 
