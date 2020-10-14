@@ -36,7 +36,8 @@ export const getFarms = (sushi) => {
           earnToken,
           rewards,
           rewardRate,
-          staked
+          staked,
+          verified
         }) => ({
           id: symbol,
           name,
@@ -50,7 +51,8 @@ export const getFarms = (sushi) => {
           earnToken,
           rewards,
           rewardRate,
-          staked
+          staked,
+          verified
         }),
       )
     : []

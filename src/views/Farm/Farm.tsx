@@ -18,7 +18,8 @@ const Farm: React.FC = () => {
     name,
     icon,
     lpContract,
-    poolContract
+    poolContract,
+    verified
   } = useFarm(farmId) || {
     lpToken: '',
     earnToken: '',
@@ -67,6 +68,14 @@ const Farm: React.FC = () => {
         subtitle={`Deposit ${lpTokenName}  Tokens and earn ${earnTokenName}`}
         title={name}
       />
+      {!verified && <React.Fragment>
+        <StakeDisclaimer>
+          The tokens for this farm are not in the default Honeyswap token list.
+          <br /><br />
+          Only interact with this farm if you know what you are doing.
+        </StakeDisclaimer>
+        <Spacer size="md" />
+      </React.Fragment>}
       <StyledFarm>
         <StyledCardsWrapper>
           <StyledCardWrapper>
@@ -154,6 +163,18 @@ const StyledCardWrapper = styled.div`
   flex-direction: column;
   @media (max-width: 768px) {
     width: 80%;
+  }
+`
+
+const StakeDisclaimer = styled.div`
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 10px;
+  background: ${({ theme }) => theme.color.red[500]};
+  color: #fff;
+  a {
+    font-weight: 500;
+    color: #fff;
   }
 `
 

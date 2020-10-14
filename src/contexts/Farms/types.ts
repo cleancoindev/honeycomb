@@ -14,6 +14,7 @@ export interface Farm {
   staked: BigNumber
   rewards: BigNumber
   rewardRate: BigNumber
+  verified: boolean
 }
 
 export interface FarmsContext {

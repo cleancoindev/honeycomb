@@ -17,7 +17,8 @@ interface Contracts {
     earnTokenAddress: string,
     earnToken: string,
     rewards: BigNumber,
-    staked: BigNumber
+    staked: BigNumber,
+    verified: boolean
   }): Promise<void>
 }
 

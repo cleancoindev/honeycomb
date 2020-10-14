@@ -15,9 +15,11 @@ export const GET_POOLS = gql`
       pair {
         id
         token0 {
+          id
           symbol
         }
         token1 {
+          id
           symbol
         }
       }
