@@ -45,7 +45,7 @@ const PendingRewards: React.FC = () => {
       <CountUp
         start={start}
         end={end}
-        decimals={end < 0 ? 4 : end > 1e5 ? 0 : 3}
+        decimals={6}
         duration={1}
         onStart={() => {
           setScale(1.25)
@@ -86,6 +86,7 @@ const Balances: React.FC = () => {
                   <Label text="Your Honey Balance" />
                   <Value
                     value={!!account ? getBalanceNumber(honeyBalance) : 'Locked'}
+                    decimals={6}
                   />
                 </div>
               </StyledRow>
