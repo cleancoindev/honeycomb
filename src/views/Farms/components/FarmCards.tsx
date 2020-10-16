@@ -12,9 +12,8 @@ import useSushi from '../../../hooks/useSushi'
 import { getSushiAddress } from '../../../sushi/utils'
 import useFarms from '../../../hooks/useFarms'
 import useTokenPrice from '../../../hooks/useTokenPrice'
-import { honeyswapClient } from '../../../apollo/clients'
-import { GET_LIQUIDITY } from '../../../apollo/queries'
 import { INTEGERS } from '../../../sushi/lib/constants'
+import { lpTokenValue } from '../../../utils/lpToken'
 
 interface FarmWithApy extends Farm {
   apy: BigNumber
@@ -47,27 +46,11 @@ const FarmCards: React.FC = () => {
           continue
         }
 
-        // Get the total amount of LP tokens for this pair
-        const lpTotalSupply = new BigNumber(
-          await farm.lpContract.methods.totalSupply().call()
-        ).div(INTEGERS.INTEREST_RATE_BASE)
-
-        // Get the total liquidity for this pair (in USD)
-        const { data: liquidityData } = await honeyswapClient.query({
-          query: GET_LIQUIDITY,
-          variables: { pair: farm.lpTokenAddress }
-        })
-        const pairLiquidityValue = new BigNumber(liquidityData.pair.reserveETH)
-
-        // Calculate the USD value of each LP token
-        const lpPricePerToken = pairLiquidityValue.div(lpTotalSupply)
-
-        // Calculate the APY
         result[farm.id] = honeyPrice
           .times(farm.rewardRate)
           .times(INTEGERS.ONE_YEAR_IN_SECONDS)
           .div(farm.staked)
-          .div(lpPricePerToken)
+          .div(await lpTokenValue(farm.lpContract))
       }
       setApy(result)
     }

@@ -1,13 +1,16 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
+import BigNumber from 'bignumber.js'
 import useSushi from '../../hooks/useSushi'
+import Loader from '../../components/Loader'
 import PageHeader from '../../components/PageHeader'
 import Spacer from '../../components/Spacer'
 import useFarm from '../../hooks/useFarm'
 import Harvest from './components/Harvest'
 import Stake from './components/Stake'
 import { formatAddress } from '../../utils'
+import { lpTokenValue } from '../../utils/lpToken'
 import { getFactoryContract } from '../../sushi/utils'
 
 const Farm: React.FC = () => {
@@ -47,6 +50,7 @@ const Farm: React.FC = () => {
 
   useEffect(() => {
     if (!factoryContract || !lpContract) return
+
     const fetchFundingAddress = async () => {
       const { proxy } = await factoryContract.methods.pools(lpContract.options.address).call()
       setFundingAddress(proxy)
@@ -55,9 +59,22 @@ const Farm: React.FC = () => {
     fetchFundingAddress()
   }, [sushi, factoryContract, lpContract])
 
+  const [lpTokenPrice, setLpTokenPrice] = useState<BigNumber | null>(null)
+  useEffect(() => {
+    if (!lpContract) return
+
+    const fetchLpTokenPrice = async () => {
+      setLpTokenPrice(await lpTokenValue(lpContract))
+    }
+
+    fetchLpTokenPrice()
+  }, [lpContract])
+
   // We're still loading
   if (!lpContract || !poolContract || !fundingAddress) {
-    return <></>
+    return <StyledLoadingWrapper>
+      <Loader text="Loading..." />
+    </StyledLoadingWrapper>
   }
 
   return (
@@ -93,14 +110,18 @@ const Farm: React.FC = () => {
         <Spacer size="md" />
         <StyledAddresses>
           <div>
-            <div>Funding address</div>
+            <div>LP token value</div>
+            <div>
+              {lpTokenPrice ? `$${lpTokenPrice.toFixed(6)}` : 'Loading...'}
+            </div>
+          </div>
+          <div>
+            <div>Funding address (do <b>NOT</b> send your LP tokens here)</div>
             <a href={`https://blockscout.com/address/${fundingAddress}`}>
               {formatAddress(fundingAddress)}
             </a>
           </div>
         </StyledAddresses>
-        <Spacer size="lg" />
-        <Spacer size="lg" />
       </StyledFarm>
     </>
   )
@@ -164,6 +185,13 @@ const StyledCardWrapper = styled.div`
   @media (max-width: 768px) {
     width: 80%;
   }
+`
+
+const StyledLoadingWrapper = styled.div`
+  align-items: center;
+  display: flex;
+  flex: 1;
+  justify-content: center;
 `
 
 const StakeDisclaimer = styled.div`
