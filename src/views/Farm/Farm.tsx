@@ -112,7 +112,7 @@ const Farm: React.FC = () => {
           <div>
             <div>LP token value</div>
             <div>
-              {lpTokenPrice ? `$${lpTokenPrice.toFixed(6)}` : 'Loading...'}
+              {lpTokenPrice ? `$${lpTokenPrice.toFixed(2)}` : 'Loading...'}
             </div>
           </div>
           <div>
