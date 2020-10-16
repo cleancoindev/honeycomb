@@ -19,18 +19,16 @@ const Farms: React.FC = ({ children }) => {
   const { data, loading } = useQuery(GET_POOLS, {
     client: honeycombClient
   })
-  const tokens = useTokens()
+  const { tokenAddresses } = useTokens()
 
   const { status } = useWallet()
   const sushi = useSushi()
 
   useEffect(() => {
     async function fetchFarms () {
-      for (const pool of data.pools) {
-        const token0Exists = !!tokens
-          .find(({ address }) => address.toLowerCase() === pool.pair.token0.id.toLowerCase())
-        const token1Exists = !!tokens
-          .find(({ address }) => address.toLowerCase() === pool.pair.token1.id.toLowerCase())
+      await Promise.all(data.pools.map(async (pool: any) => {
+        const token0Exists = tokenAddresses.includes(pool.pair.token0.id)
+        const token1Exists = tokenAddresses.includes(pool.pair.token1.id)
         await sushi.contracts.addPool({
           poolAddress: pool.id,
           lpAddress: pool.pair.id,
@@ -42,15 +40,15 @@ const Farms: React.FC = ({ children }) => {
           staked: new BigNumber(pool.staked),
           verified: token0Exists && token1Exists
         })
-      }
+      }))
 
       setFarms(getFarms(sushi))
     }
 
-    if (status === 'connected' && !loading && tokens.length) {
+    if (status === 'connected' && !loading && tokenAddresses.length) {
       fetchFarms()
     }
-  }, [status, sushi, loading, data, tokens])
+  }, [status, sushi, loading, data, tokenAddresses])
 
   return (
     <Context.Provider

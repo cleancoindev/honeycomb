@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import BigNumber from 'bignumber.js'
 import { useWallet } from 'use-wallet'
 
@@ -18,10 +18,14 @@ const Tokens: React.FC = ({ children }) => {
 
     fetchTokens()
   }, [])
+  const tokenAddresses = useMemo(() => {
+    return tokens.map(({ address }) => address.toLowerCase())
+  }, [tokens])
 
   return (
     <Context.Provider value={{
-      tokens
+      tokens,
+      tokenAddresses
     }}>
       {children}
     </Context.Provider>

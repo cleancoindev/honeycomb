@@ -13,4 +13,5 @@ export interface TokenList {
 
 export interface TokensContext {
   tokens: Array<Token>
+  tokenAddresses: Array<string>
 }

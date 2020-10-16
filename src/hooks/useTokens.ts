@@ -2,8 +2,7 @@ import { useContext } from 'react'
 import { Context as TokensContext } from '../contexts/Tokens'
 
 const useTokens = () => {
-  const { tokens } = useContext(TokensContext)
-  return tokens
+  return useContext(TokensContext)
 }
 
 export default useTokens
