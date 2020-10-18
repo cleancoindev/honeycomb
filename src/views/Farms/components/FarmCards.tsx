@@ -64,7 +64,10 @@ const FarmCards: React.FC = () => {
       ...farm,
       apy: apy[farm.id]
     })
-  )
+  ).sort((a, b) => (a.rewards.toNumber() < b.rewards.toNumber()) ? 1 : -1)
+
+
+
 
   return (
     <StyledCards>
