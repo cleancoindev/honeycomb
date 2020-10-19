@@ -64,7 +64,7 @@ const FarmCards: React.FC = () => {
       ...farm,
       apy: apy[farm.id]
     })
-  )
+    ).sort((a, b) => b.rewards.minus(a.rewards).toNumber())
 
   return (
     <StyledCards>
