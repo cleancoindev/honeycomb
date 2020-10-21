@@ -59,25 +59,53 @@ const FarmCards: React.FC = () => {
   }, [farms, honeyPrice])
 
   // Decorate farms with APYs
-  const farmsWithApy = farms.map<FarmWithApy>(
-    (farm) => ({
+  const farmsWithApy = farms
+    .map<FarmWithApy>((farm) => ({
       ...farm,
       apy: apy[farm.id]
-    })
-    ).sort((a, b) => b.rewards.minus(a.rewards).toNumber())
+    }))
+    .sort((a, b) => b.rewards.minus(a.rewards).toNumber())
+
+  const ACTIVE_THRESHOLD = new BigNumber(0.5)
+
+  const activeFarms = farmsWithApy
+    .filter((farm) => farm.rewards.gt(ACTIVE_THRESHOLD))
+
+  const inactiveFarms = farmsWithApy
+    .filter((farm) => farm.rewards.lt(ACTIVE_THRESHOLD))
 
   return (
-    <StyledCards>
-      {!!farmsWithApy.length ? (
-        farmsWithApy.map((farm, i) => (
-          <FarmCard farm={farm} key={i} />
-        ))
-      ) : (
-        <StyledLoadingWrapper>
-          <Loader text="Loading..." />
-        </StyledLoadingWrapper>
-      )}
-    </StyledCards>
+    <>
+      <FarmSectionHeader>Active farms</FarmSectionHeader>
+      <FarmSectionDescription>Farms that currently give rewards.</FarmSectionDescription>
+      <StyledCards>
+        {!!activeFarms.length ? (
+          activeFarms.map((farm, i) => (
+            <FarmCard farm={farm} key={i} />
+          ))
+        ) : (
+          <StyledLoadingWrapper>
+            <Loader text="Loading..." />
+          </StyledLoadingWrapper>
+        )}
+      </StyledCards>
+      <Spacer size='md' />
+      <FarmSectionHeader>Inactive farms</FarmSectionHeader>
+      <FarmSectionDescription>
+        These are farms that have no rewards. They will only get rewards if a funding proposal for them passes.
+      </FarmSectionDescription>
+      <StyledCards>
+        {!!inactiveFarms.length ? (
+          inactiveFarms.map((farm, i) => (
+            <FarmCard farm={farm} key={i} />
+          ))
+        ) : (
+          <StyledLoadingWrapper>
+            <Loader text="Loading..." />
+          </StyledLoadingWrapper>
+        )}
+      </StyledCards>
+    </>
   )
 }
 
@@ -133,6 +161,18 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
   )
 }
 
+const FarmSectionHeader = styled.h1`
+  font-family: 'Overpass', sans-serif;
+  color: #2C3437;
+  font-size: 32px;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+`
+
+const FarmSectionDescription = styled.p`
+  color: #2C3437;
+`
 
 const StyledCards = styled.div`
   width: 900px;
