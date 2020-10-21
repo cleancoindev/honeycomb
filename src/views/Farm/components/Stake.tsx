@@ -33,8 +33,8 @@ const Stake: React.FC<StakeProps> = ({ lpContract, poolContract, tokenName }) =>
   const allowance = useAllowance(lpContract, poolContract)
   const { onApprove } = useApprove(lpContract, poolContract)
 
-  const tokenBalance = useTokenBalance(lpContract.options.address)
-  const stakedBalance = useTokenBalance(poolContract.options.address)
+  const tokenBalance = useTokenBalance(lpContract?.options?.address)
+  const stakedBalance = useTokenBalance(poolContract?.options?.address)
 
   const { onStake } = useStake(poolContract)
   const { onUnstake } = useUnstake(poolContract)

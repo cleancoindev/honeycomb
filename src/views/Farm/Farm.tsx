@@ -6,7 +6,9 @@ import useSushi from '../../hooks/useSushi'
 import Loader from '../../components/Loader'
 import PageHeader from '../../components/PageHeader'
 import Spacer from '../../components/Spacer'
+import Countdown from '../../components/Countdown'
 import useFarm from '../../hooks/useFarm'
+import useTokenBalance from '../../hooks/useTokenBalance'
 import Harvest from './components/Harvest'
 import Stake from './components/Stake'
 import { formatAddress } from '../../utils'
@@ -59,6 +61,8 @@ const Farm: React.FC = () => {
     fetchFundingAddress()
   }, [sushi, factoryContract, lpContract])
 
+  const stakedBalance = useTokenBalance(poolContract?.options?.address)
+
   const [lpTokenPrice, setLpTokenPrice] = useState<BigNumber | null>(null)
   useEffect(() => {
     if (!lpContract) return
@@ -70,12 +74,16 @@ const Farm: React.FC = () => {
     fetchLpTokenPrice()
   }, [lpContract])
 
-  // We're still loading
-  if (!lpContract || !poolContract || !fundingAddress) {
-    return <StyledLoadingWrapper>
-      <Loader text="Loading..." />
-    </StyledLoadingWrapper>
-  }
+  const [farmingPeriodEnd, setFarmingPeriodEnd] = useState(null)
+  useEffect(() => {
+    async function fetchPeriodFinish () {
+      setFarmingPeriodEnd(await poolContract.methods.periodFinish().call())
+    }
+
+    if (poolContract) {
+      fetchPeriodFinish()
+    }
+  }, [poolContract])
 
   return (
     <>
@@ -110,15 +118,29 @@ const Farm: React.FC = () => {
         <Spacer size="md" />
         <StyledAddresses>
           <div>
-            <div>LP token value</div>
+            <div>Time remaining in farming period</div>
+            <div>
+              {farmingPeriodEnd ? (
+                <Countdown deadline={farmingPeriodEnd} />
+              ) : 'Loading...'}
+            </div>
+          </div>
+          <div>
+            <div>Price per LP token</div>
             <div>
               {lpTokenPrice ? `$${lpTokenPrice.toFixed(2)}` : 'Loading...'}
             </div>
           </div>
           <div>
+            <div>Price for your staked LP tokens</div>
+            <div>
+              {lpTokenPrice ? `$${lpTokenPrice.times(stakedBalance.div('1e18')).toFixed(2)}` : 'Loading...'}
+            </div>
+          </div>
+          <div>
             <div>Funding address (do <b>NOT</b> send your LP tokens here)</div>
             <a href={`https://blockscout.com/address/${fundingAddress}`}>
-              {formatAddress(fundingAddress)}
+              {fundingAddress ? formatAddress(fundingAddress) : 'Loading...'}
             </a>
           </div>
         </StyledAddresses>
