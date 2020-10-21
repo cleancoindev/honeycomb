@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import styled from 'styled-components'
-import { useWallet } from 'use-wallet'
+import { useWallet, ChainUnsupportedError } from 'use-wallet'
 
 import metamaskLogo from '../../assets/img/metamask-fox.svg'
 
@@ -13,32 +13,61 @@ import ModalTitle from '../ModalTitle'
 import WalletCard from './components/WalletCard'
 
 const WalletProviderModal: React.FC<ModalProps> = ({ onDismiss }) => {
-  const { account, connect } = useWallet()
+  const { connect, status, error, reset, chainId } = useWallet()
+
+  const [hasError, errorTitle, errorDescription] = useMemo(() => {
+    if (!error) {
+      return [false, null, null]
+    }
+
+    if (error instanceof ChainUnsupportedError) {
+      return [
+        true,
+        'Wrong network',
+        `Please select the xDai network in your wallet and try again.`,
+      ]
+    }
+
+    return [
+      true,
+      'Failed to enable your account',
+      'You can try another Ethereum wallet.',
+    ]
+  }, [error])
 
   useEffect(() => {
-    if (account) {
+    if (status === 'connected') {
       onDismiss()
     }
-  }, [account, onDismiss])
+  }, [status, onDismiss, error])
 
   return (
     <Modal>
-      <ModalTitle text="Select a wallet provider." />
+      <ModalTitle text={hasError ? errorTitle : "Select a wallet provider."} />
 
-      <ModalContent>
-        <StyledWalletsWrapper>
-          <StyledWalletCard>
-            <WalletCard
-              icon={<img src={metamaskLogo} alt="MetaMask Logo" style={{ height: 32 }} />}
-              onConnect={() => connect('injected')}
-              title="Metamask"
-            />
-          </StyledWalletCard>
-        </StyledWalletsWrapper>
-      </ModalContent>
+      {hasError ? (
+          <div>{errorDescription}</div>
+        ) : (
+        <ModalContent>
+          <StyledWalletsWrapper>
+            <StyledWalletCard>
+              <WalletCard
+                icon={<img src={metamaskLogo} alt="MetaMask Logo" style={{ height: 32 }} />}
+                onConnect={() => connect('injected')}
+                title="Metamask"
+              />
+            </StyledWalletCard>
+          </StyledWalletsWrapper>
+        </ModalContent>
+      )}
 
       <ModalActions>
-        <Button text="Cancel" variant="secondary" onClick={onDismiss} />
+        {hasError ? 
+          (
+            <Button text="Try again" variant="default" onClick={reset} />
+          ) : (
+            <Button text="Cancel" variant="secondary" onClick={onDismiss} />
+          )}
       </ModalActions>
     </Modal>
   )
