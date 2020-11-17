@@ -1,10 +1,12 @@
 import React from 'react';
 import BigNumber from 'bignumber.js/bignumber'
 //import roseFlower from '../../assets/img/rose_flower.svg'
-//import blueFlower from '../../assets/img/blue_flower.svg'
+import blueFlower from '../../assets/img/blue_flower.svg'
+import blueGreenTree from '../../assets/img/blue_green_tree.svg'
 import greenFlower from '../../assets/img/green_flower.svg'
 //import blueGreenFlower from '../../assets/img/blue_green_flower.svg'
 import creamFlower from '../../assets/img/cream_flower.svg'
+import creamTree from '../../assets/img/cream_tree.svg'
 //import redYellowFlower from '../../assets/img/red_yellow_flower.svg'
 //import tealFlower from '../../assets/img/teal_flower.svg'
 import yellowFlower from '../../assets/img/yellow_flower.svg'
@@ -63,5 +65,17 @@ export const knownPools = {
   '0x0de3239086dbf7edf17805107cae89b0c1a2db37': {
     name: 'Ether Eucalyptus',
     icon: <img src={greenFlower} alt="" />,
+  },
+  '0x704876d066cded601f668ee2da0519da465cbf93': {
+    name: 'Bitcoin Birch',
+    icon: <img src={creamTree} alt="" />
+  },
+  '0xadcd8e1699158627f072b080528f0ea6d020e46a': {
+    name: 'Wrapped Willow',
+    icon: <img src={blueGreenTree} alt="" />
+  },
+  '0x90d029ddbf3fb4662eceefb7f31d052f4e07856e': {
+    name: 'Link Linum',
+    icon: <img src={blueFlower} alt="" />,
   }
 }
