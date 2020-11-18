@@ -16,7 +16,8 @@ import { INTEGERS } from '../../../sushi/lib/constants'
 import { lpTokenValue } from '../../../utils/lpToken'
 
 interface FarmWithApy extends Farm {
-  apy: BigNumber
+  apy: BigNumber,
+  poolAddress?: string
 }
 
 const FarmCards: React.FC = () => {
@@ -74,13 +75,22 @@ const FarmCards: React.FC = () => {
   const inactiveFarms = farmsWithApy
     .filter((farm) => farm.rewards.lt(ACTIVE_THRESHOLD))
 
+  const curatedActiveFarms = [
+    // HNY-LINK
+    "0x90d029ddbf3fb4662eceefb7f31d052f4e07856e",
+    // WBTC-WETH
+    "0xadcd8e1699158627f072b080528f0ea6d020e46a",
+    // WBTC-XDAI
+    "0x704876d066cded601f668ee2da0519da465cbf93",
+  ]
+
   return (
     <>
       <FarmSectionHeader>Active farms</FarmSectionHeader>
       <FarmSectionDescription>Farms that currently give rewards.</FarmSectionDescription>
       <StyledCards>
         {!!activeFarms.length ? (
-          activeFarms.map((farm, i) => (
+          activeFarms.filter((farm) => curatedActiveFarms.includes(farm.poolAddress)).map((farm, i) => (
             <FarmCard farm={farm} key={i} />
           ))
         ) : (
