@@ -64,7 +64,7 @@ export class Contracts {
       poolAddress,
       poolContract,
       name: `${token0Symbol}-${token1Symbol} Pool`,
-      symbol: `${token0Symbol}-${token1Symbol} HNY-V2 LP`,
+      symbol: `${token0Symbol}-${token1Symbol} UNI-V2 LP`,
       earnToken,
       earnTokenAddress,
       rewards,
