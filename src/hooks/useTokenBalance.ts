@@ -28,7 +28,8 @@ const useTokenBalance = (tokenAddress: string) => {
     if (account) {
       fetchBalance()
     }
-  }, [account, block])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[account, block])
 
   return balance
 }

@@ -54,7 +54,7 @@ const CreateFarm: React.FC = () => {
 
     if (isValidAddress) {
       fetchPairInformation()
-    }
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isValidAddress])
 
   // Honeyswap pair data
