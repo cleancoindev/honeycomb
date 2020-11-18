@@ -20,6 +20,15 @@ interface FarmWithApy extends Farm {
   poolAddress?: string
 }
 
+const curatedActiveFarms = [
+  // HNY-LINK
+  "0x90d029ddbf3fb4662eceefb7f31d052f4e07856e",
+  // WBTC-WETH
+  "0xadcd8e1699158627f072b080528f0ea6d020e46a",
+  // WBTC-XDAI
+  "0x704876d066cded601f668ee2da0519da465cbf93",
+]
+
 const FarmCards: React.FC = () => {
   const farms = useFarms()
   const sushi = useSushi()
@@ -71,18 +80,15 @@ const FarmCards: React.FC = () => {
 
   const activeFarms = farmsWithApy
     .filter((farm) => farm.rewards.gt(ACTIVE_THRESHOLD))
+    .filter((farm) => curatedActiveFarms.includes(farm.poolAddress))
+
+  // Hotfix until we fix APY calculation
+  const endedRewardsFarms = farmsWithApy
+    .filter((farm) => farm.rewards.gt(ACTIVE_THRESHOLD))
+    .filter((farm) => !curatedActiveFarms.includes(farm.poolAddress))
 
   const inactiveFarms = farmsWithApy
     .filter((farm) => farm.rewards.lt(ACTIVE_THRESHOLD))
-
-  const curatedActiveFarms = [
-    // HNY-LINK
-    "0x90d029ddbf3fb4662eceefb7f31d052f4e07856e",
-    // WBTC-WETH
-    "0xadcd8e1699158627f072b080528f0ea6d020e46a",
-    // WBTC-XDAI
-    "0x704876d066cded601f668ee2da0519da465cbf93",
-  ]
 
   return (
     <>
@@ -90,7 +96,7 @@ const FarmCards: React.FC = () => {
       <FarmSectionDescription>Farms that currently give rewards.</FarmSectionDescription>
       <StyledCards>
         {!!activeFarms.length ? (
-          activeFarms.filter((farm) => curatedActiveFarms.includes(farm.poolAddress)).map((farm, i) => (
+          activeFarms.map((farm, i) => (
             <FarmCard farm={farm} key={i} />
           ))
         ) : (
@@ -106,7 +112,7 @@ const FarmCards: React.FC = () => {
       </FarmSectionDescription>
       <StyledCards>
         {!!inactiveFarms.length ? (
-          inactiveFarms.map((farm, i) => (
+          endedRewardsFarms.concat(inactiveFarms).map((farm, i) => (
             <FarmCard farm={farm} key={i} />
           ))
         ) : (
