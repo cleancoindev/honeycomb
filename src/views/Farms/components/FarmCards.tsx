@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js'
 import React, { useState, useEffect } from 'react'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 import Button from '../../../components/Button'
 import Card from '../../../components/Card'
 import CardContent from '../../../components/CardContent'

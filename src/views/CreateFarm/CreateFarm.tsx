@@ -1,5 +1,4 @@
 import React, { useState, useCallback, useEffect } from 'react'
-import { useWallet } from 'use-wallet'
 
 import useSushi from '../../hooks/useSushi'
 import useCreatePool from '../../hooks/useCreatePool'

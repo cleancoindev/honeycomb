@@ -1,5 +1,4 @@
 import { useCallback } from 'react'
-import { Contract } from 'web3-eth-contract'
 
 import { useWallet } from 'use-wallet'
 
