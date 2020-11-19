@@ -1,5 +1,4 @@
 import React, { useState, useCallback, useEffect } from 'react'
-import { useWallet } from 'use-wallet'
 
 import useSushi from '../../hooks/useSushi'
 import useCreatePool from '../../hooks/useCreatePool'
@@ -55,7 +54,7 @@ const CreateFarm: React.FC = () => {
 
     if (isValidAddress) {
       fetchPairInformation()
-    }
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isValidAddress])
 
   // Honeyswap pair data

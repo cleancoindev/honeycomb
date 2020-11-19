@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import styled from 'styled-components'
 import { useWallet, ChainUnsupportedError } from 'use-wallet'
 
@@ -13,7 +13,7 @@ import ModalTitle from '../ModalTitle'
 import WalletCard from './components/WalletCard'
 
 const WalletProviderModal: React.FC<ModalProps> = ({ onDismiss }) => {
-  const { connect, status, error, reset, chainId } = useWallet()
+  const { connect, status, error, reset } = useWallet()
 
   const [hasError, errorTitle, errorDescription] = useMemo(() => {
     if (!error) {

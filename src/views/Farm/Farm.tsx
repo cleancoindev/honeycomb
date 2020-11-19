@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import BigNumber from 'bignumber.js'
 import useSushi from '../../hooks/useSushi'
-import Loader from '../../components/Loader'
 import PageHeader from '../../components/PageHeader'
 import Spacer from '../../components/Spacer'
 import Countdown from '../../components/Countdown'
@@ -207,13 +206,6 @@ const StyledCardWrapper = styled.div`
   @media (max-width: 768px) {
     width: 80%;
   }
-`
-
-const StyledLoadingWrapper = styled.div`
-  align-items: center;
-  display: flex;
-  flex: 1;
-  justify-content: center;
 `
 
 const StakeDisclaimer = styled.div`

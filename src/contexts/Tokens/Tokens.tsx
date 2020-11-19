@@ -1,6 +1,4 @@
 import React, { useState, useMemo, useEffect } from 'react'
-import BigNumber from 'bignumber.js'
-import { useWallet } from 'use-wallet'
 
 import Context from './context'
 import { Token, TokenList } from './types'

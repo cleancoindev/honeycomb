@@ -14,7 +14,7 @@ import { getFarms } from '../../sushi/utils'
 import Context from './context'
 
 const Farms: React.FC = ({ children }) => {
-  const [unharvested, _] = useState(0)
+  const [unharvested] = useState(0)
   const [farms, setFarms] = useState([])
   const { data, loading } = useQuery(GET_POOLS, {
     client: honeycombClient
