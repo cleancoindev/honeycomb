@@ -1,15 +1,26 @@
 import React from 'react';
 import BigNumber from 'bignumber.js/bignumber'
 //import roseFlower from '../../assets/img/rose_flower.svg'
+import agave from '../../assets/img/agave.svg'
+import birch from '../../assets/img/birch.svg'
 import blueFlower from '../../assets/img/blue_flower.svg'
 import blueGreenTree from '../../assets/img/blue_green_tree.svg'
 import greenFlower from '../../assets/img/green_flower.svg'
-//import blueGreenFlower from '../../assets/img/blue_green_flower.svg'
+import carnationFlower from '../../assets/img/carnation_flower.svg'
 import creamFlower from '../../assets/img/cream_flower.svg'
-import creamTree from '../../assets/img/cream_tree.svg'
-//import redYellowFlower from '../../assets/img/red_yellow_flower.svg'
-//import tealFlower from '../../assets/img/teal_flower.svg'
-import yellowFlower from '../../assets/img/yellow_flower.svg'
+import elderberryTree from '../../assets/img/elderberry_tree.svg'
+import evergladesPalm from '../../assets/img/everglades_palm.svg'
+import giantRedwood from '../../assets/img/giant_redwood.svg'
+import lilyValley from '../../assets/img/lily_valley.svg'
+import lunaria from '../../assets/img/lunaria.svg'
+import lychee from '../../assets/img/lychee.svg'
+import orchid from '../../assets/img/orchid.svg'
+import silverbell from '../../assets/img/silverbell.svg'
+import strongbark from '../../assets/img/strongbark.svg'
+import ursinia from '../../assets/img/ursinia.svg'
+import yellowSunflower from '../../assets/img/sunflower.svg'
+import whitebeam from '../../assets/img/whitebeam.svg'
+import winterbloom from '../../assets/img/winterbloom.svg'
 
 export const SUBTRACT_GAS_LIMIT = 100000
 
@@ -60,7 +71,7 @@ export const knownPools = {
   },
   '0xa6c55971f21cc1c35ea617f47980d669a0c09cf3': {
     name: 'STAKE Sunflower',
-    icon: <img src={yellowFlower} alt="" />
+    icon: <img src={yellowSunflower} alt="" />
   },
   '0x0de3239086dbf7edf17805107cae89b0c1a2db37': {
     name: 'Ether Eucalyptus',
@@ -68,7 +79,7 @@ export const knownPools = {
   },
   '0x704876d066cded601f668ee2da0519da465cbf93': {
     name: 'Bitcoin Birch',
-    icon: <img src={creamTree} alt="" />
+    icon: <img src={birch} alt="" />
   },
   '0xadcd8e1699158627f072b080528f0ea6d020e46a': {
     name: 'Wrapped Willow',
@@ -77,5 +88,61 @@ export const knownPools = {
   '0x90d029ddbf3fb4662eceefb7f31d052f4e07856e': {
     name: 'Link Linum',
     icon: <img src={blueFlower} alt="" />,
+  },
+  '0x836764fc9f0447aff1ffc59e6d9b13c7644b4357': {
+    name: 'Bitcoin Buttercup',
+    icon: <img src={carnationFlower} alt="" />,
+  },
+  '0xf26ee9b4840c6b9a17e923ac38c74d678a2fc08a': {
+    name: 'EtherGlades Palm',
+    icon: <img src={evergladesPalm} alt="" />,
+  },
+  '0xec01cd2e4d45d3e086cd64940d906a94a2926ab0': {
+    name: 'Stake Silverbell',
+    icon: <img src={silverbell} alt="" />,
+  },
+  '0x68272c8873c4fcd9eea472ef363cd3165654c2e4': {
+    name: 'Ether Elderberry',
+    icon: <img src={elderberryTree} alt="" />,
+  },
+  '0x179cae1cee04ea46d658990b3a63629ad9a0b3b5': {
+    name: 'Tether WhiteBeam',
+    icon: <img src={whitebeam} alt="" />,
+  },
+  '0xec4f558a59a9460bfdeb348ac6661e66019872f7': {
+    name: 'Circle WinterBloom',
+    icon: <img src={winterbloom} alt="" />,
+  },
+  '0xb952e96d3e99b00bebdb39b7b100446256790b6f': {
+    name: 'Uniswap Ursinia',
+    icon: <img src={ursinia} alt="" />,
+  },
+  '0xd1a941812aac13bf52f54e6eab36437abd0c831a': {
+    name: 'Link Lily of the Valley',
+    icon: <img src={lilyValley} alt="" />,
+  },
+  '0x7279d68ab84037a3bbb2509306ff68cbb5986443': {
+    name: 'Link Lychee',
+    icon: <img src={lychee} alt="" />,
+  },
+  '0x74f267b4dfe414f493d97eb6012ef1b61306247d': {
+    name: 'Xmoon Lunaria',
+    icon: <img src={lunaria} alt="" />,
+  },
+  '0x239d0192f48fddbf592970748bde63615cc91c4f': {
+    name: 'OMG Orchid',
+    icon: <img src={orchid} alt="" />,
+  },
+  '0xbe7db1f595b7ec55b5bc87652361dabaac7e8f58': {
+    name: 'Synthetix Strongbark',
+    icon: <img src={strongbark} alt="" />,
+  },
+  '0x21766e9bfc48271abb85c5ede57675c908d7c9e9': {
+    name: 'Agaave',
+    icon: <img src={agave} alt="" />,
+  },
+  '0x3f283c53c1679d69916d70d79cd3fe6ab7c3e180': {
+    name: 'renZEC Redwood',
+    icon: <img src={giantRedwood} alt="" />,
   }
 }
