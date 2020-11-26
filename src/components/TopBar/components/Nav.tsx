@@ -40,7 +40,7 @@ const StyledLink = styled(NavLink)`
     color: #545F63;
   }
 
-  @media (max-width: 400px) {
+  @media (max-width: 500px) {
     padding-left: ${(props) => props.theme.spacing[2]}px;
     padding-right: ${(props) => props.theme.spacing[2]}px;
   }
