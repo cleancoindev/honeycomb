@@ -42,7 +42,7 @@ const StyledFooter = styled.footer`
   align-items: center;
   flex-shrink: 0;
   width: 100%;
-  padding: ${5 * GU}px;
+  padding: ${1 * GU}px;
 `
 const StyledFooterInner = styled.div`
   display: flex;
