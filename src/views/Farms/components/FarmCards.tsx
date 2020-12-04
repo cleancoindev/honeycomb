@@ -21,12 +21,12 @@ interface FarmWithApy extends Farm {
 }
 
 const curatedActiveFarms = [
-  // HNY-LINK
-  "0x90d029ddbf3fb4662eceefb7f31d052f4e07856e",
+  // HNY-LINK 1
+  // "0x90d029ddbf3fb4662eceefb7f31d052f4e07856e",
   // WETH-WBTC
   // "0xadcd8e1699158627f072b080528f0ea6d020e46a",
-  // WBTC-XDAI
-  "0x704876d066cded601f668ee2da0519da465cbf93",
+  // WBTC-XDAI 1
+  // "0x704876d066cded601f668ee2da0519da465cbf93",
   // XDAI-HNY
   "0x8520fc4c282342f8e746b881b9b60c14f96a0fab",
   // STAKE-HNY
