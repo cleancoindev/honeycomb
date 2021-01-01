@@ -113,10 +113,11 @@ const FarmCards: React.FC = () => {
     .sort((a, b) => b.rewards.minus(a.rewards).toNumber())
 
   const ACTIVE_THRESHOLD = new BigNumber(0.5)
-
-  const activeFarms = farmsWithApy
-    // .filter((farm) => farm.rewards.gt(ACTIVE_THRESHOLD))
-    .filter((farm) => curatedActiveFarms.includes(farm.poolAddress))
+  
+  // Use this when there's active farms
+  // const activeFarms = farmsWithApy
+  //   .filter((farm) => farm.rewards.gt(ACTIVE_THRESHOLD))
+  //   .filter((farm) => curatedActiveFarms.includes(farm.poolAddress))
 
   // Hotfix until we fix APY calculation
   const endedRewardsFarms = farmsWithApy

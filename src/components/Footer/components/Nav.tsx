@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 const Nav: React.FC = () => {
   return (
+    <StyledDiv>
     <div>
       <StyledHeader>
         Community
@@ -24,6 +25,18 @@ const Nav: React.FC = () => {
         Telegram
       </Link>
     </div>
+    <StyledDivMargin >
+      <StyledHeader>
+        Tools
+      </StyledHeader>
+      <Link href="https://www.notion.so/1Hive-Community-Handbook-f66d489df85a4011bac681963bfee796" external>
+        Handbook
+      </Link>
+      <Link href="https://1hive.gitbook.io/1hive/" external>
+        GitBook
+      </Link>
+    </StyledDivMargin>
+    </StyledDiv>
   )
 }
 
@@ -39,4 +52,13 @@ const StyledHeader = styled.h5`
   ${textStyle('body1')};
   margin-bottom: ${1.5 * GU}px;
 `
+
+const StyledDiv = styled.div`
+  display: flex;
+`
+
+const StyledDivMargin = styled.div`
+  margin-left: 25px;
+`
+
 export default Nav
