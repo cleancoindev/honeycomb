@@ -129,8 +129,8 @@ const FarmCards: React.FC = () => {
 
   return (
     <>
-      <FarmSectionHeader>Active farms</FarmSectionHeader>
-      <FarmSectionDescription>Currently, there's no Farms that give rewards.</FarmSectionDescription>
+      <FarmSectionHeader>There are no active farms</FarmSectionHeader>
+      <FarmSectionDescription>🍯 Currently, there are no farms that give rewards. 🍯</FarmSectionDescription>
       {/* <FarmSectionDescription>Farms that currently give rewards.</FarmSectionDescription> */}
       {/* <StyledCards>
         {!!activeFarms.length ? (
